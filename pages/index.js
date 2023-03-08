@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import NavBar from '@/components/NavBar'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -13,20 +14,21 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      {/* <div className='container mx-auto'> */}
+
       <NavBar />
-      <main className='flex flex-col justify-center'>
+      <main className='flex flex-col justify-center w-full'>
 
 
-        <Image
-          src="/thirteen.svg"
-          alt="13"
-          className='m-3'
-          width={200}
-          height={321}
-          priority
-        />
+        <img
+          className="max-w-screen max-h-screen"
+          src="/src/landpage.png"
+          alt="Image"
+        >
+        </img>
 
       </main>
+      {/* </div> */}
     </>
   )
 }

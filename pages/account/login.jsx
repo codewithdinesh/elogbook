@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useAuth } from '@/components/AuthUserContext';
 import Loading from '@/components/Loading';
 import { auth, authProvider } from '@/lib/firebase';
@@ -40,7 +41,7 @@ const login = () => {
 
                 setTimeout(() => {
                     Router.replace("/");
-                }, 3000)
+                }, 1000)
 
             })
                 .catch((error) => {

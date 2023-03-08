@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/research
 
 # testing
 /coverage
@@ -31,4 +32,4 @@ yarn-error.log*
 # vercel
 .vercel
 
-/lib/firebase.js
+# /lib/firebase.js

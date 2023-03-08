@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect } from 'react'
 import { useAuth } from './AuthUserContext';
 import Loading from './Loading';
@@ -27,7 +28,7 @@ const NavBar = ({ isHome }) => {
                 shadow-lg
                 navbar navbar-expand-lg navbar-light'>
 
-                <div className="container-fluid w-full flex flex-wrap items-center justify-between px-6">
+                <div className="container-fluid w-full flex flex-wrap items-center justify-between px-2 md:px-6">
 
                     <div className='cursor-pointer'>
                         <h1 className=' text-blue-800 font-semibold text-2xl'>elogbook</h1>
@@ -38,6 +39,29 @@ const NavBar = ({ isHome }) => {
 
                             (!isHome) ?
                                 <div className='flex justify-center items-center'>
+                                    <Link href="/view">
+                                        <button
+                                            type="button"
+                                            className="rounded-lg
+                                            px-6
+                                            py-2
+                                            border-2 border-blue-600
+                                            text-blue-600
+                                            font-medium
+                                            text-xs
+                                            leading-tight
+                                            uppercase
+                                            hover:bg-black hover:bg-opacity-5
+                                            focus:outline-none focus:ring-0
+                                            transition
+                                            duration-150
+                                            ease-in-out
+                                            m-1" >
+                                            View Logs
+                                        </button>
+                                    </Link>
+
+
                                     <Link href="/add">
                                         <button
                                             type="button"
@@ -62,7 +86,7 @@ const NavBar = ({ isHome }) => {
 
                                     <Link href={"/account"}>
                                         <img
-                                            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                                            src="/src/profile.png"
                                             className="rounded-full w-12 m-1"
                                             alt="Avatar" />
                                     </Link>
@@ -93,7 +117,7 @@ const NavBar = ({ isHome }) => {
 
                                     <Link href={"/account"}>
                                         <img
-                                            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                                            src="/src/profile.png"
                                             className="rounded-full w-12 m-1"
                                             alt="Avatar" />
                                     </Link>

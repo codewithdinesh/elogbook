@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useAuth } from '@/components/AuthUserContext';
 import Loading from '@/components/Loading';
+import NavBar from '@/components/NavBar';
 import { auth } from '@/lib/firebase';
 import Router from 'next/router';
 import React, { useEffect, useState } from 'react'
@@ -30,18 +32,33 @@ const index = () => {
     }
     return (
         <div>
+            <NavBar isHome={true} />
             {
                 ((!authUser && loading) || (!authUser && !loading)) ? <Loading /> :
 
-                    <div className="flex justify-center p-5">
-                        <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
-                            <h5 className="text-gray-900 text-xl leading-tight font-medium mb-2">Email : {user?.email}</h5>
-                            <h5 className="text-gray-900 text-xl leading-tight font-medium mb-2">Display Name : {user?.displayName}</h5>
-                            <h5 className="text-gray-900 text-xl leading-tight font-medium mb-2">EmailVerified : {user?.emailVerified}</h5>
-                            <h5 className="text-gray-900 text-xl leading-tight font-medium mb-2">Card title</h5>
 
-                        </div>
-                    </div>
+                    <section style={{ fontFamily: "Montserrat" }} class="  flex font-medium items-center justify-center h-screen  ">
+
+                        <section class="mx-auto bg-[#20354b] rounded-2xl px-8 py-6 shadow-lg">
+
+                            <div class="mt-6 w-fit mx-auto ">
+                                <img src="/src/profile.png" class="rounded-full w-28 " alt="profile picture" srcset=""></img>
+                            </div>
+
+                            <div class="mt-8 ">
+                                <h2 class="text-white font-bold text-2xl tracking-wide">{user?.displayName}</h2>
+                            </div>
+
+                            <div class="mt-3 text-white text-sm">
+                                <span class="text-gray-400 font-semibold">Email:</span>
+                                <span>{user?.email}</span>
+                            </div>
+
+                        </section>
+
+
+                    </section>
+
 
             }
         </div>
