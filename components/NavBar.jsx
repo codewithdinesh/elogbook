@@ -31,14 +31,18 @@ const NavBar = ({ isHome }) => {
                 <div className="container-fluid w-full flex flex-wrap items-center justify-between px-2 md:px-6">
 
                     <div className='cursor-pointer'>
-                        <h1 className=' text-blue-800 font-semibold text-2xl'>elogbook</h1>
+                        <h1 className=' text-blue-800 font-semibold text-2xl'>
+                            <Link href={"/"}>
+                                elogbook
+                            </Link>
+                        </h1>
                     </div>
 
                     {
                         (authUser && !loading) ?
 
                             (!isHome) ?
-                                <div className='flex justify-center items-center'>
+                                <div className='flex-1 flex justify-center items-center md:justify-end w-full'>
                                     <Link href="/view">
                                         <button
                                             type="button"
