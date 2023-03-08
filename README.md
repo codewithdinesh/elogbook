@@ -1,4 +1,4 @@
-# Chat Application using NextJs, and Firebase.
+# Elogbook
 
 ## Getting Started
 
