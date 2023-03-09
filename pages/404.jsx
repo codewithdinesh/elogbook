@@ -7,6 +7,7 @@ function pageNotFound() {
             <Image
                 src="/src/page_not_found.svg"
                 // fill
+                alt='Loading...'
                 height={350}
                 width={350}
                 className='m-20'

@@ -154,6 +154,8 @@ const add = () => {
             }
         };
 
+        
+
         await setDoc(doc(db, "production", date), data, { merge: true });
 
         toast("Data Added")
@@ -294,16 +296,36 @@ const add = () => {
                             </>
                             {/*  cell index */}
                             <div className="border border-slate-500 text-black rounded-lg m-1  row-span-4 md:row-span-2 col-span-2 md:col-span-1 text-center flex items-center">
-                                <input
-                                    type="text"
-                                    name={"cell_index"}
+                                <select
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    name="cell_index"
                                     onChange={(e) => {
                                         e.preventDefault();
                                         onDetailsChange(e)
                                     }}
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0" placeholder="">
+                                >
+                                    <option value="" >select option</option>
+                                    <option value="C3" >C3</option>
+                                    <option value="C5">C5</option>
+                                    <option value="C6">C6</option>
 
-                                </input>
+                                    <option value="B1">B1</option>
+                                    <option value="B2">B2</option>
+                                    <option value="B3">B3</option>
+                                    <option value="B4">B4</option>
+                                    <option value="B5">B5</option>
+
+                                    <option value="H1">H1</option>
+                                    <option value="H2">H2</option>
+                                    <option value="H3">H3</option>
+                                    <option value="H4">H4</option>
+                                    <option value="H5">H5</option>
+                                    <option value="H6">H6</option>
+                                    <option value="H7">H7</option>
+                                    <option value="H8">H8</option>
+
+
+                                </select>
 
                             </div>
 
@@ -457,16 +479,27 @@ const add = () => {
 
                             </div>
                             <div className="border border-slate-500 text-black rounded-lg m-1 col-span-2">
-                                <input type="text"
-                                    name={"manpower_planned"}
+                                <select
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    name="manpower_planned"
                                     onChange={(e) => {
                                         e.preventDefault();
                                         onDetailsChange(e)
                                     }}
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                    placeholder="Enter..." required>
+                                >
+                                    <option value="">Select </option>
+                                    <option value="1" >1</option>
+                                    <option value="2" >2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
 
-                                </input>
+
+
+                                </select>
                             </div>
 
 
@@ -475,15 +508,25 @@ const add = () => {
                                 Manpower Present
                             </div>
                             <div className="border border-slate-500 text-black rounded-lg m-1 col-span-2">
-                                <input type="text"
-                                    name={"manpower_present"}
+                                <select
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    name="manpower_present"
                                     onChange={(e) => {
                                         e.preventDefault();
                                         onDetailsChange(e)
                                     }}
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                    placeholder="Enter here..." required>
-                                </input>
+                                >
+                                    <option value="">Select </option>
+                                    <option value="1" >1</option>
+                                    <option value="2" >2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+
+                                </select>
 
                             </div>
 
@@ -509,6 +552,10 @@ const add = () => {
                         {/* Data entries for production */}
                         {
                             hrs.map((ele) => {
+
+
+
+
                                 return <div className='grid grid-cols-12' key={ele}>
 
                                     {/* Hrs */}
@@ -516,64 +563,74 @@ const add = () => {
                                         {ele}
                                     </div>
 
-                                    {/* Production */}
-                                    <div className="border border-slate-500 text-black   col-span-2 md:col-span-1">
-                                        <input type="text"
-                                            name={"prod" + ele}
-                                            onChange={(e) => {
-                                                e.preventDefault();
-                                                onProductionDetailsChange(e)
-                                            }}
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                            placeholder="" >
+                                    {(ele == "Tea I" || ele == "Tea II" || ele == "Lunch") ? null :
+                                        <>
 
-                                        </input>
-                                    </div>
+                                            {/* Production */}
+                                            <div className="border border-slate-500 text-black   col-span-2 md:col-span-1">
+                                                <input type="text"
+                                                    name={"prod" + ele}
+                                                    onChange={(e) => {
+                                                        e.preventDefault();
+                                                        onProductionDetailsChange(e)
+                                                    }}
+                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                    placeholder="" >
 
-                                    {/* cum. production */}
-                                    <div className="border border-slate-500 text-black col-span-2 md:col-span-1">
-                                        <input type="text"
-                                            name={"cum_prod" + ele}
-                                            onChange={(e) => {
-                                                e.preventDefault();
-                                                onProductionDetailsChange(e)
-                                            }}
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                            placeholder="" >
+                                                </input>
+                                            </div>
 
-                                        </input>
-                                    </div>
+                                            {/* cum. production */}
+                                            <div className="border border-slate-500 text-black col-span-2 md:col-span-1">
+                                                <input type="text"
+                                                    name={"cum_prod" + ele}
+                                                    onChange={(e) => {
+                                                        e.preventDefault();
+                                                        onProductionDetailsChange(e)
+                                                    }}
+                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                    placeholder="" >
 
-                                    {/* Production loss */}
-                                    <div className="border border-slate-500 text-black  col-span-2 md:col-span-1">
-                                        <input type="text"
-                                            name={"prod_loss" + ele}
-                                            onChange={(e) => {
-                                                e.preventDefault();
-                                                onProductionDetailsChange(e)
-                                            }}
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                            placeholder="" >
+                                                </input>
+                                            </div>
 
-                                        </input>
-                                    </div>
+                                            {/* Production loss */}
+                                            <div className="border border-slate-500 text-black  col-span-2 md:col-span-1">
+                                                <input type="text"
+                                                    name={"prod_loss" + ele}
+                                                    onChange={(e) => {
+                                                        e.preventDefault();
+                                                        onProductionDetailsChange(e)
+                                                    }}
+                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                    placeholder="" >
+
+                                                </input>
+                                            </div>
 
 
-                                    {/* Production loss reason */}
-                                    <div className="border border-slate-500 text-black  col-span-4 md:col-span-8">
+                                            {/* Production loss reason */}
+                                            <div className="border border-slate-500 text-black  col-span-4 md:col-span-8 ">
+                                                <select
+                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    name={"prod_loss_reason" + ele}
+                                                    onChange={(e) => {
+                                                        e.preventDefault();
+                                                        onProductionDetailsChange(e);
+                                                    }}>
 
-                                        <input type="text"
-                                            name={"prod_loss_reason" + ele}
-                                            onChange={(e) => {
-                                                e.preventDefault();
-                                                onProductionDetailsChange(e)
-                                            }}
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                            placeholder="" >
+                                                    <option value="">Select </option>
+                                                    <option value="PDT" >PDT</option>
+                                                    <option value="M1 feed hold" >M1 feed hold</option>
+                                                    <option value="M2 feed hold"> M2 feed hold</option>
+                                                    <option value="FRD tool change">FRD tool change</option>
+                                                    <option value="Frd lub makino lub oil level low.oil level low">Frd lub.oil level low</option>
+                                                    <option value="Makino lub oil level low">Makino lub oil level low</option>
+                                                </select>
 
-                                        </input>
-
-                                    </div>
+                                            </div>
+                                        </>
+                                    }
                                 </div>
                             })
                         }
@@ -1136,14 +1193,15 @@ const add = () => {
                         }
                     </div>
 
-                    <div className="flex justify-center space-x-2">
+                    <div className="flex justify-center space-x-2 m-1">
                         <button
                             type="button"
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+
                             onClick={(e) => {
                                 e.preventDefault();
                                 onAdd();
-                            }}
-                            className="inline-block rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]">
+                            }}>
                             Submit
                         </button>
                     </div>

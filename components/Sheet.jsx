@@ -102,7 +102,7 @@ const Sheet = ({ sheet }) => {
                                 <input type="text"
                                     value={sheet?.details?.name2}
                                     disabled
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0" placeholder="Enter Name..." required>
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0" >
 
                                 </input>
                             </div>
@@ -112,7 +112,7 @@ const Sheet = ({ sheet }) => {
 
                                 <input type="text"
                                     value={sheet?.details?.sign2}
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0" placeholder="Enter Signature..." required>
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0" >
 
                                 </input>
 
@@ -868,6 +868,24 @@ const Sheet = ({ sheet }) => {
                                 </div>
                             })
                         }
+                    </div>
+
+                    {/* submitted by */}
+                    <div className=" grid grid-cols-10 col-span-12 md:col-span-6 grid-rows-1 mt-2 ">
+
+                        <div className="border border-slate-500 text-black  col-span-3  flex items-center justify-center font-semibold">
+                            Submitted by
+                        </div>
+
+                        <div className="border border-slate-500 text-black  col-span-7  flex items-center justify-center font-semibold">
+                            <input type="text"
+                                disabled
+                                value={sheet?.submitted_by?.name + " ( " + sheet?.submitted_by?.email + " )"}
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                placeholder="" >
+
+                            </input>
+                        </div>
                     </div>
                 </div>
 

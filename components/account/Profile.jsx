@@ -36,20 +36,20 @@ export const Profile = () => {
                 ((!authUser && loading) || (!authUser && !loading)) ? <Loading /> :
 
 
-                    <section style={{ fontFamily: "Montserrat" }} class="  flex font-medium items-center justify-center h-screen  ">
+                    <section style={{ fontFamily: "Montserrat" }} className="  flex font-medium items-center justify-center h-screen  ">
 
-                        <section class="mx-auto bg-[#20354b] rounded-2xl px-8 py-6 shadow-lg">
+                        <section className="mx-auto bg-[#20354b] rounded-2xl px-8 py-6 shadow-lg">
 
-                            <div class="mt-6 w-fit mx-auto ">
-                                <img src="/src/profile.png" class="rounded-full w-28 " alt="profile picture" srcset=""></img>
+                            <div className="mt-6 w-fit mx-auto ">
+                                <img src="/src/profile.png" className="rounded-full w-28 " alt="profile picture" srcset=""></img>
                             </div>
 
-                            <div class="mt-8 ">
-                                <h2 class="text-white font-bold text-2xl tracking-wide">{user?.displayName}</h2>
+                            <div className="mt-8 ">
+                                <h2 className="text-white font-bold text-2xl tracking-wide">{user?.displayName}</h2>
                             </div>
 
-                            <div class="mt-3 text-white text-sm">
-                                <span class="text-gray-400 font-semibold">Email:</span>
+                            <div className="mt-3 text-white text-sm">
+                                <span className="text-gray-400 font-semibold">Email:</span>
                                 <span>{user?.email}</span>
                             </div>
 
