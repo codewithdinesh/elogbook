@@ -9,6 +9,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
 import React, { useEffect, useState } from 'react'
+import Select from 'react-select';
 
 
 
@@ -662,8 +663,112 @@ const add = () => {
                                         </div>
 
 
+                                        {/* Area of mc */}
+                                        <div className="border border-slate-500 text-black  col-span-1 ">
+
+
+                                            <Select
+                                                id={ele}
+                                                // className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                // name={"area_of_mc" + ele}
+                                                options={
+                                                    [
+                                                        { label: "All cell", value: "All cell" },
+                                                        { label: "Input", value: "Input" },
+                                                        { label: "Induction heating machine", value: "Induction heating machine" },
+                                                        { label: "Makino LH", value: "Makino LH" },
+                                                        { label: "Makino RH", value: "Mkaino RH" },
+                                                        { label: "FRD LH", value: "FRD LH" },
+                                                        { label: "FRD RH", value: "FRD RH" },
+                                                        { label: "Washing machine", value: "Washing machine" },
+                                                        { label: "Both makino", value: "Both makino" },
+                                                        { label: "Plug fitting", value: "Plug fitting" },
+
+                                                        { label: "leak test and pipe press", value: "leak test and pipe press" },
+                                                        { label: "Nozzle press machine", value: "Nozzle press machine" },
+                                                        { label: "Conuyor", value: "Conuyor" },
+
+                                                    ]
+                                                }
+                                                onChange={(e) => {
+
+                                                    const d = {
+                                                        target: {
+                                                            value: e.value,
+                                                            name: "area_of_mc" + ele
+                                                        }
+                                                    }
+
+                                                    // console.log(d.target.value)
+
+                                                    onProductionDetailsChange(d);
+                                                }}>
+                                            </Select>
+
+                                        </div>
+
+                                        {/* Effect on */}
+                                        <div className="border border-slate-500 text-black  col-span-1 ">
+                                            <select
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                name={"effect_on" + ele}
+                                                onChange={(e) => {
+                                                    e.preventDefault();
+                                                    onProductionDetailsChange(e);
+                                                }}>
+
+                                                <option value="">Select </option>
+                                                <option value="A" >A</option>
+                                                <option value="P" >P</option>
+                                                <option value="Q"> Q</option>
+                                                <option value="Shutdown">Shutdown</option>
+
+                                            </select>
+
+                                        </div>
+
+                                        {/* loss criteria */}
+                                        <div className="border border-slate-500 text-black  col-span-1 ">
+                                            <select
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                name={"loss_criteria" + ele}
+                                                onChange={(e) => {
+                                                    e.preventDefault();
+                                                    onProductionDetailsChange(e);
+                                                }}>
+                                                {
+                                                    production["effect_on" + ele] == "A" ? <>
+                                                        <option value="">Select </option>
+                                                        <option value="Equipment Failure loss" >Equipment Failure loss</option>
+                                                        <option value="Setup and Adjustment" >Setup and Adjustment</option>
+                                                        <option value="Tool Change loss"> Tool Change loss</option>
+                                                        <option value="Measure and Adjust loss">Measure and Adjust loss</option>
+                                                        <option value="Defect loss">Defect loss</option>
+
+                                                    </>
+                                                        : production["effect_on" + ele] == "P" ?
+                                                            <>
+                                                                <option value="">Select </option>
+                                                                <option value="Minor stopages" >Minor stopages</option>
+                                                                <option value="Speed loss" >Speed loss</option>
+                                                                <option value="motion loss"> motion loss</option>
+
+                                                            </> : production["effect_on" + ele] == "Q" ?
+                                                                <>
+                                                                    <option value="">Select </option>
+                                                                    <option value="Rejection" >Rejection</option>
+                                                                    <option value="Vender Rejection" >Vender Rejection</option>
+                                                                </> : null
+                                                }
+
+
+
+                                            </select>
+
+                                        </div>
+
                                         {/* Production loss reason */}
-                                        <div className="border border-slate-500 text-black  col-span-4 md:col-span-8 ">
+                                        <div className="border border-slate-500 text-black  col-span-1 ">
                                             <select
                                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 name={"prod_loss_reason" + ele}
@@ -673,14 +778,39 @@ const add = () => {
                                                 }}>
 
                                                 <option value="">Select </option>
-                                                <option value="PDT" >PDT</option>
-                                                <option value="M1 feed hold" >M1 feed hold</option>
-                                                <option value="M2 feed hold"> M2 feed hold</option>
-                                                <option value="FRD tool change">FRD tool change</option>
-                                                <option value="Frd lub makino lub oil level low.oil level low">Frd lub.oil level low</option>
-                                                <option value="Makino lub oil level low">Makino lub oil level low</option>
+
                                             </select>
 
+                                        </div>
+
+                                        {/* start timing */}
+                                        <div className="border border-slate-500 text-black   col-span-1">
+                                            <input
+                                                type='time'
+                                                name={"start_timing" + ele}
+                                                onChange={(e) => {
+                                                    e.preventDefault();
+                                                    onProductionDetailsChange(e)
+                                                }}
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                placeholder="" >
+
+                                            </input>
+                                        </div>
+
+                                        {/* stop timing */}
+                                        <div className="border border-slate-500 text-black   col-span-1">
+                                            <input
+                                                type='time'
+                                                name={"start_timing" + ele}
+                                                onChange={(e) => {
+                                                    e.preventDefault();
+                                                    onProductionDetailsChange(e)
+                                                }}
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                placeholder="" >
+
+                                            </input>
                                         </div>
                                     </>
 

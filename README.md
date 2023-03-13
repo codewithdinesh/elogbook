@@ -4,6 +4,7 @@
 ## Getting Started
 
 > Clone the git repository
+> Install nodejs 
 
 Add firebase auth info into .env.local in project Folder:
 ```
@@ -16,6 +17,14 @@ NEXT_PUBLIC_APP_ID=1:
 NEXT_PUBLIC_MEASUREMENT_ID=
 
 ```
+Install dependancy
+
+```bash
+npm install
+# or
+yarn install
+```
+
 Run the development server:
 
 ```bash
@@ -31,4 +40,9 @@ yarn dev
 <img width="960" alt="image" src="https://user-images.githubusercontent.com/72983957/223905120-30bd2ed0-c9a7-41b9-9d11-803739135e63.png">
 <img width="947" alt="image" src="https://user-images.githubusercontent.com/72983957/223905170-0243c368-55e8-46de-9b21-d4935d09918d.png">
 <img width="941" alt="image" src="https://user-images.githubusercontent.com/72983957/223905208-83a5017d-26ed-4767-99fa-3a955cc2ac7e.png">
+
+
+## Reference
+- https://www.digitalocean.com/community/tutorials/react-react-select
+
 
