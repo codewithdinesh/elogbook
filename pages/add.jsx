@@ -78,7 +78,8 @@ const add = () => {
         setProduction({
             ...production,
             [name]: value
-        })
+        });
+        console.log(production)
 
     }
 
@@ -154,7 +155,7 @@ const add = () => {
             }
         };
 
-        
+
 
         await setDoc(doc(db, "production", date), data, { merge: true });
 
@@ -169,7 +170,7 @@ const add = () => {
 
         <>
             <NavBar isHome={true} />
-            <div className="mx-auto container p-1">
+            <div className=" mx-auto container  p-1">
 
                 <div className="flex flex-col rounded-lg  p-1 sm:p-2 md:p-5 bg-white ">
                     <ToastContainer />
@@ -478,6 +479,7 @@ const add = () => {
                                 Manpower Planned
 
                             </div>
+
                             <div className="border border-slate-500 text-black rounded-lg m-1 col-span-2">
                                 <select
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -496,8 +498,6 @@ const add = () => {
                                     <option value="6">6</option>
                                     <option value="7">7</option>
                                     <option value="8">8</option>
-
-
 
                                 </select>
                             </div>
@@ -542,95 +542,148 @@ const add = () => {
 
                         {/* Titles of production */}
                         <div className='grid grid-cols-12 font-semibold'>
-                            <div className="border border-slate-500 text-black col-span-2 md:col-span-1 p-2.5">Hr.</div>
-                            <div className="border border-slate-500 text-black  col-span-2 md:col-span-1 p-2.5">Prod.</div>
-                            <div className="border border-slate-500 text-black  col-span-2 p-2.5 md:col-span-1">Cum. Prod.</div>
-                            <div className="border border-slate-500 text-black  col-span-2 md:col-span-1 p-2.5 ">Prod. Loss</div>
-                            <div className="border border-slate-500 text-black  col-span-4 md:col-span-8 p-2.5">Loss Reason</div>
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1">Hr.</div>
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Man/Hr</div>
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Models</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Prod.</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:p-2.5 p-1 md:col-span-1 overflow-hidden">Cum. Prod.</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Prod. Loss</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Area of mc.</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Effect on</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Loss criteria</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Loss Details</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Start timing </div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">stop timing</div>
                         </div>
 
                         {/* Data entries for production */}
                         {
                             hrs.map((ele) => {
 
-
-
-
                                 return <div className='grid grid-cols-12' key={ele}>
 
                                     {/* Hrs */}
-                                    <div className="border border-slate-500 text-black  col-span-2 md:col-span-1  flex items-center justify-center font-semibold" >
+                                    <div className="border border-slate-500 text-black  col-span-1 md:col-span-1  flex items-center justify-center font-semibold" >
                                         {ele}
                                     </div>
 
-                                    {(ele == "Tea I" || ele == "Tea II" || ele == "Lunch") ? null :
-                                        <>
+                                    <>
 
-                                            {/* Production */}
-                                            <div className="border border-slate-500 text-black   col-span-2 md:col-span-1">
-                                                <input type="text"
-                                                    name={"prod" + ele}
-                                                    onChange={(e) => {
-                                                        e.preventDefault();
+                                        {/* Man per hrs */}
+                                        <div className="border border-slate-500 text-black  col-span-1 ">
+                                            <select
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                name={"man_per_hr" + ele}
+                                                onChange={(e) => {
+                                                    e.preventDefault();
+                                                    onProductionDetailsChange(e);
+                                                }}>
+
+                                                <option value="">Select </option>
+                                                <option value="1" >1</option>
+                                                <option value="2" >2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+
+                                            </select>
+
+                                        </div>
+
+                                        {/* models */}
+                                        <div className="border border-slate-500 text-black  col-span-1 ">
+                                            <select
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                name={"models" + ele}
+                                                onChange={(e) => {
+                                                    e.preventDefault();
+                                                    onProductionDetailsChange(e);
+                                                }}>
+
+                                                <option value="">Select </option>
+                                                <option value="Jy" >Jy</option>
+                                                <option value="K10" >K10</option>
+                                                <option value="Ju">Ju</option>
+                                                <option value="JL">JL</option>
+
+                                            </select>
+
+                                        </div>
+
+                                        {/* Production */}
+                                        <div className="border border-slate-500 text-black   col-span-1">
+                                            <input type="text"
+                                                name={"prod" + ele}
+                                                onChange={(e) => {
+                                                    e.preventDefault();
+                                                    onProductionDetailsChange(e)
+                                                }}
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                placeholder="" >
+
+                                            </input>
+                                        </div>
+
+                                        {/* cum. production */}
+                                        <div className="border border-slate-500 text-black col-span-1">
+                                            <input type="text"
+                                                name={"cum_prod" + ele}
+                                                onChange={(e) => {
+                                                    e.preventDefault();
+                                                    onProductionDetailsChange(e)
+                                                }}
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                placeholder="" >
+
+                                            </input>
+                                        </div>
+
+                                        {/* Production loss */}
+                                        <div className="border border-slate-500 text-black  col-span-1">
+                                            <input type="text"
+                                                name={"prod_loss" + ele}
+                                                onChange={(e) => {
+                                                    e.preventDefault();
+                                                    if (e.target.value == NaN || e.target.value == undefined || e.target.value == "") {
+
+                                                    } else {
+
                                                         onProductionDetailsChange(e)
-                                                    }}
-                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                                    placeholder="" >
+                                                    }
+                                                }}
+                                                value={
+                                                    String(production[`prod${ele}`] - production[`cum_prod${ele}`] || "")
+                                                }
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                placeholder="" >
 
-                                                </input>
-                                            </div>
-
-                                            {/* cum. production */}
-                                            <div className="border border-slate-500 text-black col-span-2 md:col-span-1">
-                                                <input type="text"
-                                                    name={"cum_prod" + ele}
-                                                    onChange={(e) => {
-                                                        e.preventDefault();
-                                                        onProductionDetailsChange(e)
-                                                    }}
-                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                                    placeholder="" >
-
-                                                </input>
-                                            </div>
-
-                                            {/* Production loss */}
-                                            <div className="border border-slate-500 text-black  col-span-2 md:col-span-1">
-                                                <input type="text"
-                                                    name={"prod_loss" + ele}
-                                                    onChange={(e) => {
-                                                        e.preventDefault();
-                                                        onProductionDetailsChange(e)
-                                                    }}
-                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                                    placeholder="" >
-
-                                                </input>
-                                            </div>
+                                            </input>
+                                        </div>
 
 
-                                            {/* Production loss reason */}
-                                            <div className="border border-slate-500 text-black  col-span-4 md:col-span-8 ">
-                                                <select
-                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                    name={"prod_loss_reason" + ele}
-                                                    onChange={(e) => {
-                                                        e.preventDefault();
-                                                        onProductionDetailsChange(e);
-                                                    }}>
+                                        {/* Production loss reason */}
+                                        <div className="border border-slate-500 text-black  col-span-4 md:col-span-8 ">
+                                            <select
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                name={"prod_loss_reason" + ele}
+                                                onChange={(e) => {
+                                                    e.preventDefault();
+                                                    onProductionDetailsChange(e);
+                                                }}>
 
-                                                    <option value="">Select </option>
-                                                    <option value="PDT" >PDT</option>
-                                                    <option value="M1 feed hold" >M1 feed hold</option>
-                                                    <option value="M2 feed hold"> M2 feed hold</option>
-                                                    <option value="FRD tool change">FRD tool change</option>
-                                                    <option value="Frd lub makino lub oil level low.oil level low">Frd lub.oil level low</option>
-                                                    <option value="Makino lub oil level low">Makino lub oil level low</option>
-                                                </select>
+                                                <option value="">Select </option>
+                                                <option value="PDT" >PDT</option>
+                                                <option value="M1 feed hold" >M1 feed hold</option>
+                                                <option value="M2 feed hold"> M2 feed hold</option>
+                                                <option value="FRD tool change">FRD tool change</option>
+                                                <option value="Frd lub makino lub oil level low.oil level low">Frd lub.oil level low</option>
+                                                <option value="Makino lub oil level low">Makino lub oil level low</option>
+                                            </select>
 
-                                            </div>
-                                        </>
-                                    }
+                                        </div>
+                                    </>
+
                                 </div>
                             })
                         }
@@ -897,7 +950,7 @@ const add = () => {
 
                     <div className="col-span-12 grid grid-cols-12">
                         <div className=" border-slate-500 text-black  col-span-12  font-semibold">
-                            QCR
+                            QSR
                         </div>
 
                         <div className="col-span-8 grid grid-cols-7 grid-rows-3">
@@ -1070,7 +1123,6 @@ const add = () => {
                         </div>
 
                         {/* entires 1 */}
-
                         {
                             [1, 2, 3, 4].map(ele => {
                                 return <div className="col-span-12 grid grid-cols-10 " key={ele}>
