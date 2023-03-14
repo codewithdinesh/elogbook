@@ -740,6 +740,10 @@ const add = () => {
                                                     e.preventDefault();
                                                     onProductionDetailsChange(e);
                                                 }}>
+                                        
+                                            </select>
+
+                                        </div>
                                                 {
                                                     production["effect_on" + ele] == "A" ? <>
                                                         <option value="">Select </option>
