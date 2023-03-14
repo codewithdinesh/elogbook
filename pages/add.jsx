@@ -793,7 +793,103 @@ const add = () => {
                                                     onProductionDetailsChange(e);
                                                 }}>
 
-                                                <option value="">Select </option>
+                                                      </>: production["effect_on" + ele] == "A" ?
+                                                      </>: production["effect_on" + ele] == "Tool change Loss" ?
+                                                            <>
+                                                                <option value="">Select </option>
+                                                                <option value="FRD LH" > FRD LH </option>
+                                                                <option value="FRD RH" >FRD RH</option>
+                                                                <option value=" Makino LH" >Makino LH </option>
+                                                                <option value=" Makino RH" >Makino RH</option>
+
+                                                      </>: production["effect_on" + ele] == "Equipment Loss" ?
+                                                            <>
+                                                                <option value="">Select </option>
+                                                                <option value="Convyor not work" > Convyor not work</option>
+                                                                <option value="Air leakage" >Air leakage</option>
+                                                                <option value=" Auto door Prob" >Auto door Prob</option>
+                                                                <option value=" R face height Prob" >R face height Prob</option>
+                                                                <option value="Auto power failure" > Auto door Power failure </option>
+                                                                <option value="Hyd. Oil level low" >Hyd.oil level low</option>
+                                                                <option value=" Lub.oil level low" >Lub.oil level low </option>
+                                                                <option value=" Oriation sensor fail" >Oriation sensor fail</option>
+                                                                <option value="Over current fault" > Over current fault </option>
+                                                                <option value="Feed hold" >Feed hold</option>
+                                                                <option value=" Coan cleaning" >Coan cleaning</option>
+                                                                <option value=" T commander Error" >T commander Error</option>
+
+                                                       </>: production["effect_on" + ele] == "Management Loss" ?
+                                                            <>
+                                                                <option value="">Select </option>
+                                                                <option value="No man power" > No man power </option>
+                                                                <option value="No Air" >No Air</option>
+                                                                <option value=" No material" > No material</option>
+                                                                <option value=" No plan" > No plan</option>
+                                                                <option value=" No Empty bin" > No Empty bin</option>
+
+                                                      </>: production["effect_on" + ele] == "Defect Loss" ?
+                                                            <>
+                                                                <option value="">Select </option>
+                                                                <option value="Random" > Random </option>
+                                                                <option value="B type Defect" > B type Defect</option>
+
+
+                                                     </>: production["effect_on" + ele] == "P" ?
+                                                      </>: production["effect_on" + ele] == "Minor Stopages" ?
+                                                            <>
+                                                                <option value="">Select </option>
+                                                                <option value="Probe Out of Tol" > Probe out of Tol</option>
+                                                                <option value="M.C feed hold" >M.C feed hold</option>
+                                                                <option value=" Tool life over" >Tool life over </option>
+                                                                <option value=" Probe start up failure" >Probe start up failure</option>
+                                                                <option value="Pallet ready prob" > Pallet ready prob </option>
+                                                                <option value="Sl upper limit alarm" >Sl upper limit alarm</option>
+                                                                <option value=" Tool life over" >Tool life over </option>
+                                                                <option value=" Seal change" >Seal change</option>
+                                                                <option value=" Seat check Prob" >Seat check Prob</option>
+
+                                                      </>: production["effect_on" + ele] == "Speed Loss" ?
+                                                            <>
+                                                                <option value="">Select </option>
+                                                                <option value="Tool parameters change" > Tool parameters change </option>
+                                                                <option value=" M.C parameters change" > M.C parameters change</option>
+
+                                                      </>: production["effect_on" + ele] == "motion Loss" ?
+                                                            <>
+                                                                <option value="">Select </option>
+                                                                <option value="Layout change" > Layout change </option>
+                                                                <option value=" Blanceing change" > Blanceing change</option>
+
+                                                      </>: production["effect_on" + ele] == "Q" ?
+                                                      </>: production["effect_on" + ele] == "Vendor Defect" ?
+                                                            <>
+                                                                <option value="">Select </option>
+                                                                <option value="C.D" > C.D </option>
+                                                                <option value="Operation missing" >Operation missing</option>
+                                                                <option value=" Input Dent" >Input Dent </option>
+
+                                                      </>: production["effect_on" + ele] == "Rejection" ?
+                                                            <>
+                                                                <option value="">Select </option>
+                                                                <option value="Milling face dent" > Milling face dent </option>
+
+                                                       
+                                                           </>: production["effect_on" + ele] == "Others" ?
+                                                      </>: production["effect_on" + ele] == "Others" ?
+                                                            <>
+                                                                <option value="">Select </option>
+                                                                <option value="Start up/ warm up/ daily jh" > Start up/ warm up/ daily Jh</option>
+                                                                <option value="single side running" >Single side running</option>
+                                                                <option value=" Break work other cell" >Break work other cell </option>  
+                                                                <option value="Inventory clear" > Inventory clear </option>
+                                                                <option value="New model trial" >New model trial</option>
+                                                                <option value=" weekly jh makino & Frd" >weekly jh makino & frd</option> 
+                                                                <option value="Robo C.D MLH" > Robo C.D MLH</option>
+                                                                <option value="Robo c.D. MRH" >Robo C.D MRH</option>
+                                                                <option value=" Robo C.D Frd RH" > Robo C.D Frd RH </option>
+                                                                <option value="Robo C.D Frd LH" > Robo C.D Frd LH </option>
+                                                                <option value="Robo C.D Frd RH" >Robo C.D Frd RH</option>
+                                                                <option value=" New man Training" > New man Training </option>
 
                                             </select>
 
