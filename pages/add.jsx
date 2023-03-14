@@ -793,7 +793,7 @@ const add = () => {
                                                     onProductionDetailsChange(e);
                                                 }}>
 
-                                                      </>: production["effect_on" + ele] == "A" ?
+                                                     
                                                       </>: production["effect_on" + ele] == "Tool change Loss" ?
                                                             <>
                                                                 <option value="">Select </option>
@@ -834,7 +834,7 @@ const add = () => {
                                                                 <option value="B type Defect" > B type Defect</option>
 
 
-                                                     </>: production["effect_on" + ele] == "P" ?
+                                                     
                                                       </>: production["effect_on" + ele] == "Minor Stopages" ?
                                                             <>
                                                                 <option value="">Select </option>
@@ -863,7 +863,7 @@ const add = () => {
                                                       </>: production["effect_on" + ele] == "Q" ?
                                                       </>: production["effect_on" + ele] == "Vendor Defect" ?
                                                             <>
-                                                                <option value="">Select </option>
+                                                                
                                                                 <option value="C.D" > C.D </option>
                                                                 <option value="Operation missing" >Operation missing</option>
                                                                 <option value=" Input Dent" >Input Dent </option>
@@ -874,7 +874,7 @@ const add = () => {
                                                                 <option value="Milling face dent" > Milling face dent </option>
 
                                                        
-                                                           </>: production["effect_on" + ele] == "Others" ?
+                                                           
                                                       </>: production["effect_on" + ele] == "Others" ?
                                                             <>
                                                                 <option value="">Select </option>
