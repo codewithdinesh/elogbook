@@ -830,7 +830,7 @@ const add = () => {
                                         <div className="border border-slate-500 text-black   col-span-1">
                                             <input
                                                 type='time'
-                                                name={"start_timing" + "Stop Timing ele}
+                                                name={"add time ele}
                                                 onChange={(e) => {
                                                     e.preventDefault();
                                                     onProductionDetailsChange(e)
@@ -1326,8 +1326,7 @@ const add = () => {
 
                                     <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
                                         <input type="text"
-                                            name={"tool_life_" + ele}
-                                            onChange={(e) => {
+                                            name={"tool_life_" + el  onChange={(e) => {
                                                 e.preventDefault();
                                                 onTotalChangesDetails(e);
                                             }}
