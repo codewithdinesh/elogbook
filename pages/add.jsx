@@ -547,7 +547,7 @@ const add = () => {
                             <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Man/Hr</div>
                             <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Models</div>
                             <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Prod.</div>
-                            <div className="border border-slate-500 text-black  col-span-1 md:p-2.5 p-1 md:col-span-1 overflow-hidden">Cum. Prod.</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:p-2.5 p-1 md:col-span-1 overflow-hidden"> Act. Prod.</div>
                             <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Prod. Loss</div>
                             <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Area of mc.</div>
                             <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Effect on</div>
@@ -626,10 +626,10 @@ const add = () => {
                                             </input>
                                         </div>
 
-                                        {/* cum. production */}
+                                        {/* Act. production */}
                                         <div className="border border-slate-500 text-black col-span-1">
                                             <input type="text"
-                                                name={"cum_prod" + ele}
+                                                name={"Act._prod" + ele}
                                                 onChange={(e) => {
                                                     e.preventDefault();
                                                     onProductionDetailsChange(e)
@@ -686,7 +686,7 @@ const add = () => {
 
                                                         { label: "leak test and pipe press", value: "leak test and pipe press" },
                                                         { label: "Nozzle press machine", value: "Nozzle press machine" },
-                                                        { label: "Conuyor", value: "Conuyor" },
+                                                        { label: "Convyor", value: "Convyor" },
 
                                                     ]
                                                 }
@@ -722,6 +722,9 @@ const add = () => {
                                                 <option value="P" >P</option>
                                                 <option value="Q"> Q</option>
                                                 <option value="Shutdown">Shutdown</option>
+                                                <option value="Other">Other</option>
+                                                   
+
 
                                             </select>
 
@@ -744,6 +747,7 @@ const add = () => {
                                                         <option value="Tool Change loss"> Tool Change loss</option>
                                                         <option value="Measure and Adjust loss">Measure and Adjust loss</option>
                                                         <option value="Defect loss">Defect loss</option>
+                                                        <option value="Management loss">Management loss</option>
 
                                                     </>
                                                         : production["effect_on" + ele] == "P" ?
@@ -758,7 +762,18 @@ const add = () => {
                                                                     <option value="">Select </option>
                                                                     <option value="Rejection" >Rejection</option>
                                                                     <option value="Vender Rejection" >Vender Rejection</option>
-                                                                </> : null
+
+                                                            </> : production["effect_on" + ele] == "Shutdown" ?
+                                                                <>
+                                                                    <option value="">Select </option>
+                                                                    <option value="Shutdown" > Shutdown</option>
+                                                                     
+
+                                                            </> : production["effect_on" + ele] == "Other" ?
+                                                                <>
+                                                                    <option value="">Select </option>
+                                                                    <option value="Other" > Other</option>
+                                                               </> : null
                                                 }
 
 
