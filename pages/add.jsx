@@ -555,6 +555,7 @@ const add = () => {
                             <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Loss Details</div>
                             <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Start timing </div>
                             <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">stop timing</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Total timing</div>
                         </div>
 
                         {/* Data entries for production */}
@@ -818,6 +819,18 @@ const add = () => {
                                             <input
                                                 type='time'
                                                 name={"start_timing" + ele}
+                                                onChange={(e) => {
+                                                    e.preventDefault();
+                                                    onProductionDetailsChange(e)
+                                                }}
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                placeholder="" >
+                                                
+                                           {/* Total timing */}
+                                        <div className="border border-slate-500 text-black   col-span-1">
+                                            <input
+                                                type='time'
+                                                name={"start_timing" + "Stop Timing ele}
                                                 onChange={(e) => {
                                                     e.preventDefault();
                                                     onProductionDetailsChange(e)
