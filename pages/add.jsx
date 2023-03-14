@@ -791,9 +791,7 @@ const add = () => {
                                                 onChange={(e) => {
                                                     e.preventDefault();
                                                     onProductionDetailsChange(e);
-                                                }}>
-
-                                                     
+                                             
                                                       </>: production["effect_on" + ele] == "Tool change Loss" ?
                                                             <>
                                                                 <option value="">Select </option>
