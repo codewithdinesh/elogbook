@@ -135,7 +135,8 @@ const add = () => {
 
     // add data to firebase firestore
     const addToFirebase = async () => {
-        // const ref = collection(doc(db, `production`, date),);
+
+        const ref = collection(doc(db, `production`, date), details.cell_index);
 
 
         const data =
@@ -158,7 +159,8 @@ const add = () => {
 
 
 
-        await setDoc(doc(db, "production", date), data, { merge: true });
+        // await setDoc(doc(db, "production", date), data, { merge: true });
+        addDoc(ref, data);
 
         toast("Data Added")
 
