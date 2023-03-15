@@ -573,6 +573,8 @@ const add = () => {
                                         {ele}
                                     </div>
 
+
+
                                     <>
 
                                         {/* Man per hrs */}
@@ -634,7 +636,7 @@ const add = () => {
                                         {/* Act. production */}
                                         <div className="border border-slate-500 text-black col-span-1">
                                             <input type="text"
-                                                name={"Act._prod" + ele}
+                                                name={"act_prod" + ele}
                                                 onChange={(e) => {
                                                     e.preventDefault();
                                                     onProductionDetailsChange(e)
@@ -649,8 +651,11 @@ const add = () => {
                                         <div className="border border-slate-500 text-black  col-span-1">
                                             <input type="text"
                                                 name={"prod_loss" + ele}
+                                                disabled
                                                 onChange={(e) => {
                                                     e.preventDefault();
+
+                                                    
                                                     if (e.target.value == NaN || e.target.value == undefined || e.target.value == "") {
 
                                                     } else {
@@ -659,7 +664,9 @@ const add = () => {
                                                     }
                                                 }}
                                                 value={
-                                                    String(production[`prod${ele}`] - production[`cum_prod${ele}`] || "")
+
+                                                    String(production[`prod${ele}`] - production[`act_prod${ele}`] || "")
+
                                                 }
                                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
                                                 placeholder="" >
@@ -670,8 +677,6 @@ const add = () => {
 
                                         {/* Area of mc */}
                                         <div className="border border-slate-500 text-black  col-span-1 ">
-
-
                                             <Select
                                                 id={ele}
                                                 // className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -688,7 +693,6 @@ const add = () => {
                                                         { label: "Washing machine", value: "Washing machine" },
                                                         { label: "Both makino", value: "Both makino" },
                                                         { label: "Plug fitting", value: "Plug fitting" },
-
                                                         { label: "leak test and pipe press", value: "leak test and pipe press" },
                                                         { label: "Nozzle press machine", value: "Nozzle press machine" },
                                                         { label: "Convyor", value: "Convyor" },
@@ -703,9 +707,6 @@ const add = () => {
                                                             name: "area_of_mc" + ele
                                                         }
                                                     }
-
-                                                    // console.log(d.target.value)
-
                                                     onProductionDetailsChange(d);
                                                 }}>
                                             </Select>
@@ -728,9 +729,6 @@ const add = () => {
                                                 <option value="Q"> Q</option>
                                                 <option value="Shutdown">Shutdown</option>
                                                 <option value="Other">Other</option>
-                                                   
-
-
                                             </select>
 
                                         </div>
@@ -744,10 +742,8 @@ const add = () => {
                                                     e.preventDefault();
                                                     onProductionDetailsChange(e);
                                                 }}>
-                                        
-                                            </select>
 
-                                        </div>
+
                                                 {
                                                     production["effect_on" + ele] == "A" ? <>
                                                         <option value="">Select </option>
@@ -770,133 +766,133 @@ const add = () => {
                                                                 <>
                                                                     <option value="">Select </option>
                                                                     <option value="Rejection" >Rejection</option>
-                                                                    <option value="Vender Rejection" >Vender Rejection</option>
+                                                                    <option value="Vender rejection" >Vender Rejection</option>
 
-                                                            </> : production["effect_on" + ele] == "Shutdown" ?
-                                                                <>
-                                                                    <option value="">Select </option>
-                                                                    <option value="Shutdown" > Shutdown</option>
-                                                                     
+                                                                </> : production["effect_on" + ele] == "Shutdown" ?
+                                                                    <>
+                                                                        <option value="">Select </option>
+                                                                        <option value="Shutdown" > Shutdown</option>
 
-                                                            </> : production["effect_on" + ele] == "Other" ?
-                                                                <>
-                                                                    <option value="">Select </option>
-                                                                    <option value="Other" > Other</option>
-                                                               </> : null
+
+                                                                    </> : production["effect_on" + ele] == "Other" ?
+                                                                        <>
+                                                                            <option value="">Select </option>
+                                                                            <option value="Others" > Others</option>
+                                                                        </> : null
                                                 }
-
-
-
                                             </select>
-
                                         </div>
 
                                         {/* Production loss reason */}
                                         <div className="border border-slate-500 text-black  col-span-1 ">
+
                                             <select
                                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 name={"prod_loss_reason" + ele}
-                                                onChange={(e) => {
-                                                    e.preventDefault();
-                                                    onProductionDetailsChange(e);
-                                             
-                                                      </>: production["effect_on" + ele] == "Tool change Loss" ?
-                                                            <>
-                                                                <option value="">Select </option>
-                                                                <option value="FRD LH" > FRD LH </option>
-                                                                <option value="FRD RH" >FRD RH</option>
-                                                                <option value=" Makino LH" >Makino LH </option>
-                                                                <option value=" Makino RH" >Makino RH</option>
+                                                onChange={
+                                                    (e) => {
+                                                        e.preventDefault();
+                                                        onProductionDetailsChange(e);
+                                                    }
+                                                }
+                                            >
+                                                {
+                                                    production["loss_criteria" + ele] == "Tool Change loss" ?
+                                                        <>
+                                                            <option value="">Select </option>
+                                                            <option value="FRD LH" > FRD LH </option>
+                                                            <option value="FRD RH" >FRD RH</option>
+                                                            <option value="Makino LH" >Makino LH </option>
+                                                            <option value="Makino RH" >Makino RH</option>
 
-                                                      </>: production["effect_on" + ele] == "Equipment Loss" ?
+                                                        </> : production["loss_criteria" + ele] == "Equipment Failure loss" ?
                                                             <>
                                                                 <option value="">Select </option>
                                                                 <option value="Convyor not work" > Convyor not work</option>
                                                                 <option value="Air leakage" >Air leakage</option>
-                                                                <option value=" Auto door Prob" >Auto door Prob</option>
-                                                                <option value=" R face height Prob" >R face height Prob</option>
+                                                                <option value="Auto door Prob" >Auto door Prob</option>
+                                                                <option value="R face height Prob" >R face height Prob</option>
                                                                 <option value="Auto power failure" > Auto door Power failure </option>
                                                                 <option value="Hyd. Oil level low" >Hyd.oil level low</option>
-                                                                <option value=" Lub.oil level low" >Lub.oil level low </option>
-                                                                <option value=" Oriation sensor fail" >Oriation sensor fail</option>
+                                                                <option value="Lub.oil level low" >Lub.oil level low </option>
+                                                                <option value="Oriation sensor fail" >Oriation sensor fail</option>
                                                                 <option value="Over current fault" > Over current fault </option>
                                                                 <option value="Feed hold" >Feed hold</option>
-                                                                <option value=" Coan cleaning" >Coan cleaning</option>
-                                                                <option value=" T commander Error" >T commander Error</option>
+                                                                <option value="Coan cleaning" >Coan cleaning</option>
+                                                                <option value="T commander Error" >T commander Error</option>
 
-                                                       </>: production["effect_on" + ele] == "Management Loss" ?
-                                                            <>
-                                                                <option value="">Select </option>
-                                                                <option value="No man power" > No man power </option>
-                                                                <option value="No Air" >No Air</option>
-                                                                <option value=" No material" > No material</option>
-                                                                <option value=" No plan" > No plan</option>
-                                                                <option value=" No Empty bin" > No Empty bin</option>
+                                                            </> : production["loss_criteria" + ele] == "Management loss" ?
+                                                                <>
+                                                                    <option value="">Select </option>
+                                                                    <option value="No man power" > No man power </option>
+                                                                    <option value="No Air" >No Air</option>
+                                                                    <option value="No material" > No material</option>
+                                                                    <option value="No plan" > No plan</option>
+                                                                    <option value="No Empty bin" > No Empty bin</option>
 
-                                                      </>: production["effect_on" + ele] == "Defect Loss" ?
-                                                            <>
-                                                                <option value="">Select </option>
-                                                                <option value="Random" > Random </option>
-                                                                <option value="B type Defect" > B type Defect</option>
+                                                                </> : production["loss_criteria" + ele] == "Defect loss" ?
+                                                                    <>
+                                                                        <option value="">Select </option>
+                                                                        <option value="Random" > Random </option>
+                                                                        <option value="B type Defect" > B type Defect</option>
 
 
-                                                     
-                                                      </>: production["effect_on" + ele] == "Minor Stopages" ?
-                                                            <>
-                                                                <option value="">Select </option>
-                                                                <option value="Probe Out of Tol" > Probe out of Tol</option>
-                                                                <option value="M.C feed hold" >M.C feed hold</option>
-                                                                <option value=" Tool life over" >Tool life over </option>
-                                                                <option value=" Probe start up failure" >Probe start up failure</option>
-                                                                <option value="Pallet ready prob" > Pallet ready prob </option>
-                                                                <option value="Sl upper limit alarm" >Sl upper limit alarm</option>
-                                                                <option value=" Tool life over" >Tool life over </option>
-                                                                <option value=" Seal change" >Seal change</option>
-                                                                <option value=" Seat check Prob" >Seat check Prob</option>
 
-                                                      </>: production["effect_on" + ele] == "Speed Loss" ?
-                                                            <>
-                                                                <option value="">Select </option>
-                                                                <option value="Tool parameters change" > Tool parameters change </option>
-                                                                <option value=" M.C parameters change" > M.C parameters change</option>
+                                                                    </> : production["loss_criteria" + ele] == "Minor stopages" ?
+                                                                        <>
+                                                                            <option value="">Select </option>
+                                                                            <option value="Probe Out of Tol" > Probe out of Tol</option>
+                                                                            <option value="M.C feed hold" >M.C feed hold</option>
+                                                                            <option value="Tool life over" >Tool life over </option>
+                                                                            <option value="Probe start up failure" >Probe start up failure</option>
+                                                                            <option value="Pallet ready prob" > Pallet ready prob </option>
+                                                                            <option value="Sl upper limit alarm" >Sl upper limit alarm</option>
+                                                                            <option value="Tool life over" >Tool life over </option>
+                                                                            <option value="Seal change" >Seal change</option>
+                                                                            <option value="Seat check Prob" >Seat check Prob</option>
 
-                                                      </>: production["effect_on" + ele] == "motion Loss" ?
-                                                            <>
-                                                                <option value="">Select </option>
-                                                                <option value="Layout change" > Layout change </option>
-                                                                <option value=" Blanceing change" > Blanceing change</option>
+                                                                        </> : production["loss_criteria" + ele] == "Speed loss" ?
+                                                                            <>
+                                                                                <option value="">Select </option>
+                                                                                <option value="Tool parameters change" > Tool parameters change </option>
+                                                                                <option value="M.C parameters change" > M.C parameters change</option>
 
-                                                      </>: production["effect_on" + ele] == "Q" ?
-                                                      </>: production["effect_on" + ele] == "Vendor Defect" ?
-                                                            <>
-                                                                
-                                                                <option value="C.D" > C.D </option>
-                                                                <option value="Operation missing" >Operation missing</option>
-                                                                <option value=" Input Dent" >Input Dent </option>
+                                                                            </> : production["loss_criteria" + ele] == "motion Loss" ?
+                                                                                <>
+                                                                                    <option value="">Select </option>
+                                                                                    <option value="Layout change" > Layout change </option>
+                                                                                    <option value="Blanceing change" > Blanceing change</option>
 
-                                                      </>: production["effect_on" + ele] == "Rejection" ?
-                                                            <>
-                                                                <option value="">Select </option>
-                                                                <option value="Milling face dent" > Milling face dent </option>
+                                                                                </> : production["loss_criteria" + ele] == "Vender rejection" ?
+                                                                                    <>
 
-                                                       
-                                                           
-                                                      </>: production["effect_on" + ele] == "Others" ?
-                                                            <>
-                                                                <option value="">Select </option>
-                                                                <option value="Start up/ warm up/ daily jh" > Start up/ warm up/ daily Jh</option>
-                                                                <option value="single side running" >Single side running</option>
-                                                                <option value=" Break work other cell" >Break work other cell </option>  
-                                                                <option value="Inventory clear" > Inventory clear </option>
-                                                                <option value="New model trial" >New model trial</option>
-                                                                <option value=" weekly jh makino & Frd" >weekly jh makino & frd</option> 
-                                                                <option value="Robo C.D MLH" > Robo C.D MLH</option>
-                                                                <option value="Robo c.D. MRH" >Robo C.D MRH</option>
-                                                                <option value=" Robo C.D Frd RH" > Robo C.D Frd RH </option>
-                                                                <option value="Robo C.D Frd LH" > Robo C.D Frd LH </option>
-                                                                <option value="Robo C.D Frd RH" >Robo C.D Frd RH</option>
-                                                                <option value=" New man Training" > New man Training </option>
+                                                                                        <option value="C.D" > C.D </option>
+                                                                                        <option value="Operation missing" >Operation missing</option>
+                                                                                        <option value="Input Dent" >Input Dent </option>
 
+                                                                                    </> : production["loss_criteria" + ele] == "Rejection" ?
+                                                                                        <>
+                                                                                            <option value="">Select </option>
+                                                                                            <option value="Milling face dent" > Milling face dent </option>
+
+
+                                                                                        </> : production["loss_criteria" + ele] == "Others" ?
+                                                                                            <>
+                                                                                                <option value="">Select </option>
+                                                                                                <option value="Start up/ warm up/ daily jh" > Start up/ warm up/ daily Jh</option>
+                                                                                                <option value="single side running" >Single side running</option>
+                                                                                                <option value="Break work other cell" >Break work other cell </option>
+                                                                                                <option value="Inventory clear" > Inventory clear </option>
+                                                                                                <option value="New model trial" >New model trial</option>
+                                                                                                <option value="weekly jh makino & Frd" >weekly jh makino & frd</option>
+                                                                                                <option value="Robo C.D MLH" > Robo C.D MLH</option>
+                                                                                                <option value="Robo c.D. MRH" >Robo C.D MRH</option>
+                                                                                                <option value="Robo C.D Frd RH" > Robo C.D Frd RH </option>
+                                                                                                <option value="Robo C.D Frd LH" > Robo C.D Frd LH </option>
+                                                                                                <option value="Robo C.D Frd RH" >Robo C.D Frd RH</option>
+                                                                                                <option value="New man Training" > New man Training </option>
+                                                                                            </> : null
+                                                }
                                             </select>
 
                                         </div>
@@ -920,28 +916,17 @@ const add = () => {
                                         <div className="border border-slate-500 text-black   col-span-1">
                                             <input
                                                 type='time'
-                                                name={"start_timing" + ele}
+                                                name={"stop_timing" + ele}
                                                 onChange={(e) => {
                                                     e.preventDefault();
                                                     onProductionDetailsChange(e)
                                                 }}
                                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
                                                 placeholder="" >
-                                                
-                                           {/* Total timing */}
-                                        <div className="border border-slate-500 text-black   col-span-1">
-                                            <input
-                                                type='time'
-                                                name={"add time ele}
-                                                onChange={(e) => {
-                                                    e.preventDefault();
-                                                    onProductionDetailsChange(e)
-                                                }}
-                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                                placeholder="" >
-
                                             </input>
                                         </div>
+
+
                                     </>
 
                                 </div>
@@ -1428,7 +1413,8 @@ const add = () => {
 
                                     <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
                                         <input type="text"
-                                            name={"tool_life_" + el  onChange={(e) => {
+                                            name={"tool_life_" + ele}
+                                            onChange={(e) => {
                                                 e.preventDefault();
                                                 onTotalChangesDetails(e);
                                             }}
@@ -1516,7 +1502,7 @@ const add = () => {
                             Submit
                         </button>
                     </div>
-                </div>
+                </div >
 
             </div >
         </>
