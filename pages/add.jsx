@@ -1332,9 +1332,7 @@ const add = () => {
                                     placeholder="" >
 
                                 </input>
-                                <input type="file"
-                           accept="image/png, image/jpeg">
-                          </input>
+                                
                             </div>
                         </div>
 
@@ -1387,6 +1385,9 @@ const add = () => {
                                             placeholder="" >
 
                                         </input>
+                                      <input type="file"
+                           accept="image/png, image/jpeg">
+                          </input>
                                     </div>
 
                                     <div className="col-span-2 border border-slate-500 text-black    flex items-center justify-center font-semibold">
