@@ -1402,9 +1402,7 @@ const add = () => {
                                     </div>
 
                                     <div className="col-span-3 border border-slate-500 text-black    flex items-center justify-center font-semibold">
-                                        <input type="file"
-                           accept="image/png, image/jpeg">
-                          </input>
+                                        <input type="Text"
                                             name={"tool_dec_" + ele}
                                             onChange={(e) => {
                                                 e.preventDefault();
@@ -1414,6 +1412,9 @@ const add = () => {
                                             placeholder="" >
 
                                         </input>
+                                      <input type="file"
+                           accept="image/png, image/jpeg">
+                          </input>
                                     </div>
 
                                     <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
