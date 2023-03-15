@@ -1357,6 +1357,7 @@ const add = () => {
 
                         <div className="col-span-3 border border-slate-500 text-black    flex items-center justify-center font-semibold">
                             Tool Description
+                          </input>"img"jpg
                         </div>
 
                         <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
