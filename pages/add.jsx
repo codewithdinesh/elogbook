@@ -2,7 +2,7 @@
 import { useAuth } from '@/components/AuthUserContext'
 import Loading from '@/components/Loading';
 import NavBar from '@/components/NavBar';
-import { auth, db } from '@/lib/firebase';
+import { auth, db, storage } from '@/lib/firebase';
 import { addDoc, arrayUnion, collection, doc, setDoc } from 'firebase/firestore';
 import Router from 'next/router';
 import { ToastContainer, toast } from 'react-toastify'
@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import React, { useEffect, useState } from 'react'
 import Select from 'react-select';
+import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
 
 
 
@@ -27,16 +28,22 @@ const add = () => {
     const [shift, setShift] = useState("");
     const [details, setDetails] = useState({});
 
-    const [production, setProduction] = useState({
-        "prod": 0,
-        "act_prod": 0,
-        "loss": 0
-    });
+    const [production, setProduction] = useState({});
+
     const [rejections, setRejections] = useState({});
     const [qsr, setQsr] = useState({});
     const [totalChanges, setTotalChanges] = useState({});
     const [messsages, setMessages] = useState({});
+
+    const [toolDescription, setToolDescription] = useState({});
+
+    // to hold total production,actual production, total time ,etc;
     const [total, setTotal] = useState({});
+
+    const [progress, setProgress] = useState(0);
+
+    const [toolDescriptionImages, setToolDescriptionImages] = useState({});
+
 
 
     const onAdd = () => {
@@ -48,6 +55,10 @@ const add = () => {
 
         console.log("Total changes", totalChanges);
 
+        // const files = Object.entries(toolDescription);
+        // console.log(files);
+
+
         date.split(' ').join('');
         console.log("Date: ", date)
         if (date == "" || date === "") {
@@ -56,7 +67,9 @@ const add = () => {
             toast("Please select Shift");
 
         } else {
-            // toast("Not working")
+
+            handleUpload();
+
             addToFirebase();
         }
 
@@ -85,26 +98,67 @@ const add = () => {
             [name]: value
         });
 
-        console.log(production)
+        // console.log(production)
+    }
 
-        {
+    const onCalculateTotal = (e) => {
 
-            hrs.map(ele => {
-                var prod = production["prod" + ele]
-                var act_prod = production["act_prod" + ele]
-                var loss = production["loss" + ele]
+        var total_production = 0, total_actual_production = 0, total_loss = 0, total_time = 0;
 
-                setTotal({
-                    "prod": parseInt(total.prod) + prod,
-                    "act_prod": total.act_prod + act_prod,
-                    "loss": total.loss + loss
-                })
-            })
+        var temp = new Date();
 
-        }
+        var local_date1, local_date2;
+
+        local_date1 = temp.toJSON().substring(0, 10);
+        local_date2 = temp.toJSON().substring(0, 10);
+
+
+
+
+        hrs.map(ele => {
+
+            if (production["start_timing" + ele] > production["stop_timing" + ele]) {
+                temp.setDate(temp.getDate() + 1);
+                local_date2 = temp.toJSON().substring(0, 10);
+            }
+
+            // console.log(local_date1, local_date2);
+            var prod = parseInt(production["production" + ele] || 0)
+            var act_prod = parseInt(production["actual_production" + ele] || 0)
+            var loss = parseInt(production["production_loss" + ele] || 0)
+            var start_time = new Date(local_date1 + " " + production["start_timing" + ele]) || 0
+            var stop_time = new Date(local_date2 + " " + production["stop_timing" + ele]) || 0
+            var time = stop_time - start_time || 0;
+
+            // console.log("start:", start_time)
+            // console.log("stop:", stop_time)
+            // console.log("time:", time);
+
+            total_actual_production = act_prod + total_actual_production;
+            total_production = total_production + prod;
+            total_loss = total_loss + loss;
+            total_time = time + total_time;
+
+
+        });
+
+        console.log("time:", total_time);
+
+        setTotal({
+            "total_production": total_production,
+            "total_actual_production": total_actual_production,
+            "total_loss": total_loss,
+            "total_time": millisToMinutesAndSeconds(total_time)
+        })
 
     }
 
+
+    function millisToMinutesAndSeconds(millis) {
+        var minutes = Math.floor(millis / 60000);
+        var seconds = ((millis % 60000) / 1000).toFixed(0);
+        return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+    }
 
     const onChangeRejections = (e) => {
 
@@ -153,41 +207,120 @@ const add = () => {
 
     }
 
+    const onToolDescriptionChange = (e) => {
+
+        let name = e.target.name;
+        let value = e.target.files[0];
+
+        setToolDescription({
+            ...toolDescription,
+            [name]: value
+        });
+    }
+
+    const handleUpload = () => {
+        // if (!toolDescription) {
+        //     alert("Please choose a file first!")
+        // }
+
+        const files = Object.entries(toolDescription);
+        console.log(files);
+
+        files.forEach((e) => {
+            // console.log(e[1].name)
+            const name = e[0];
+
+            const storageRef = ref(storage, `/files/${e[1].name}`);
+
+            const uploadTask = uploadBytesResumable(storageRef, e[1]);
+
+            uploadTask.on(
+                "state_changed",
+                (snapshot) => {
+                    const percent = Math.round(
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    );
+
+                    // update progress
+                    setProgress(percent);
+                    console.log("uploading:", percent);
+                },
+                (err) => console.log(err),
+
+                () => {
+                    // download url
+                    getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                        console.log(url);
+
+                        setToolDescriptionImages({
+                            ...toolDescriptionImages,
+                            [name]: url
+                        })
+                    });
+                }
+            );
+
+        })
+    }
 
     // add data to firebase firestore
     const addToFirebase = async () => {
 
-        const ref = collection(doc(db, `production`, date), details.cell_index);
+        // const refCol = doc(db, "production");
+
+        // const subCol = collection(refCol, date, details.cell_index);
+
+        // const ref1 = doc(subCol, shift);
+
+        // production > date > cell > shift > data
+
+        const ref = doc(db, `production`, date, details.cell_index, shift);
 
 
         const data =
         {
-            [shift]: {
-                "date": date,
-                "shift": shift,
-                "details": details,
-                "production": production,
-                "rejections": rejections,
-                "qsr": qsr,
-                "total_changes": totalChanges,
-                "messages": messsages,
-                "submitted_by": {
-                    email: auth.currentUser.email,
-                    name: auth.currentUser.displayName
-                }
+
+            "date": date,
+            "shift": shift,
+            "details": details,
+            "production":
+            {
+                production,
+                total
+            },
+            "rejections": rejections,
+            "qsr": qsr,
+            "total_changes": {
+                totalChanges,
+                toolDescriptionImages
+            },
+
+            "messages": messsages,
+            "submitted_by": {
+                email: auth.currentUser.email,
+                name: auth.currentUser.displayName
             }
+
         };
 
 
+        await setDoc(ref, data, { merge: true }).then(res => {
+            if (res) {
+                toast("Data Added")
+            } else {
+                toast("something went wrong")
+            }
 
-        // await setDoc(doc(db, "production", date), data, { merge: true });
-        addDoc(ref, data);
 
-        toast("Data Added")
+        }).catch(e => {
+            toast("something went wrong..")
+
+        });
+
 
     }
     // hrs details
-    const hrs = [1, 2, "Tea I", 3, 4, "Lunch", 5, 6, "Tea II", 7, 8, "Total"];
+    const hrs = [1, 2, 3, 4, 5, 6, 7, 8, "Tea I", "Lunch", "Tea II", "Total"];
 
 
     return (
@@ -580,7 +713,7 @@ const add = () => {
                             <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Loss Details</div>
                             <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Start timing </div>
                             <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">stop timing</div>
-                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Total timing</div>
+
                         </div>
 
                         {/* Data entries for production */}
@@ -643,7 +776,7 @@ const add = () => {
                                         {/* Production */}
                                         <div className="border border-slate-500 text-black   col-span-1">
                                             <input type="text"
-                                                name={"prod" + ele}
+                                                name={"production" + ele}
                                                 onChange={(e) => {
                                                     e.preventDefault();
                                                     onProductionDetailsChange(e)
@@ -657,7 +790,7 @@ const add = () => {
                                         {/* Act. production */}
                                         <div className="border border-slate-500 text-black col-span-1">
                                             <input type="text"
-                                                name={"act_prod" + ele}
+                                                name={"actual_production" + ele}
                                                 onChange={(e) => {
                                                     e.preventDefault();
                                                     onProductionDetailsChange(e)
@@ -670,36 +803,33 @@ const add = () => {
 
                                         {/* Production loss */}
                                         <div className="border border-slate-500 text-black  col-span-1">
-                                            <input type="text"
-                                                name={"prod_loss" + ele}
-                                                disabled
+
+                                            <select
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                name={"production_loss" + ele}
+
                                                 onChange={(e) => {
                                                     e.preventDefault();
-
-
-                                                    if (e.target.value == NaN || e.target.value == undefined || e.target.value == "") {
-
-                                                    } else {
-
-                                                        onProductionDetailsChange(e)
-                                                    }
+                                                    onProductionDetailsChange(e);
                                                 }}
-                                                value={
 
-                                                    String(production[`prod${ele}`] - production[`act_prod${ele}`] || "")
+                                            >
 
-                                                }
-                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                                placeholder="" >
+                                                <option value={0}>Select </option>
+                                                <option value={production[`production${ele}`] - production[`actual_production${ele}`] || 0}>
+                                                    {production[`production${ele}`] - production[`actual_production${ele}`] || 0}
+                                                </option>
+                                            </select>
 
-                                            </input>
+
                                         </div>
 
 
                                         {/* Area of mc */}
                                         <div className="border border-slate-500 text-black  col-span-1 ">
                                             <Select
-                                                id={ele}
+                                                id={ele + "random"}
+                                                instanceId={ele + "random"}
                                                 // className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 // name={"area_of_mc" + ele}
                                                 options={
@@ -809,7 +939,7 @@ const add = () => {
 
                                             <select
                                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                name={"prod_loss_reason" + ele}
+                                                name={"production_loss_reason" + ele}
                                                 onChange={
                                                     (e) => {
                                                         e.preventDefault();
@@ -921,6 +1051,7 @@ const add = () => {
                                                                                                     <option value="New man Training" > New man Training </option>
                                                                                                 </> : null
                                                 }
+
                                             </select>
 
                                         </div>
@@ -961,12 +1092,46 @@ const add = () => {
                             })
                         }
 
-                        <div className='grid grid-cols-12 font-semibold'>
+                        <div className='grid grid-cols-12 font-semibold grid-rows-1'>
 
                             <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1">Total</div>
-                            <div className="border border-slate-500 text-black col-span-2 md:col-span-2 md:p-2.5 p-1"></div>
+                            <div className="border border-slate-500 text-black col-span-2 md:col-span-2 md:p-2.5 p-1">
+                                <button
+                                    type="button"
+                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        onCalculateTotal();
+                                    }}>
+                                    Calculate Total
+                                </button>
+
+                            </div>
+
+                            {/* total production */}
                             <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1">
-                                {total.prod}
+                                {total.total_production}
+                            </div>
+
+                            {/* Total actual production */}
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1">
+                                {total.total_actual_production}
+                            </div>
+
+                            {/* Total loss */}
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1">
+                                {total.total_loss}
+                            </div>
+
+                            <div className="border border-slate-500 text-black col-span-4 md:p-2.5 p-1">
+
+                            </div>
+
+
+                            {/* Total Time*/}
+                            <div className="border border-slate-500 text-black col-span-2 md:p-2.5 p-1">
+                                Total Time : {total.total_time || 0} (minutes)
                             </div>
 
 
@@ -1442,20 +1607,22 @@ const add = () => {
                                         </input>
                                     </div>
 
-                                    <div className="col-span-3 border border-slate-500 text-black    flex items-center justify-center font-semibold">
-                                        <input type="Text"
-                                            name={"tool_dec_" + ele}
-                                            onChange={(e) => {
-                                                e.preventDefault();
-                                                onTotalChangesDetails(e);
-                                            }}
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                            placeholder="" >
+                                    <div className="col-span-3 border border-slate-500 text-black dark:bg-gray-700   flex items-center justify-center font-semibold">
+                                        <div className="flex justify-center">
+                                            <div className="m-1 w-full">
 
-                                        </input>
-                                        <input type="file"
-                                            accept="image/png, image/jpeg">
-                                        </input>
+                                                <input
+                                                    className="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 dark:border-neutral-600 bg-clip-padding py-[0.32rem] px-3 text-base font-normal text-neutral-700 dark:text-neutral-200 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 dark:file:bg-neutral-700 file:px-3 file:py-[0.32rem] file:text-neutral-700 dark:file:text-neutral-100 file:transition file:duration-150 file:ease-in-out file:[margin-inline-end:0.75rem] file:[border-inline-end-width:1px] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-[0_0_0_1px] focus:shadow-primary focus:outline-none"
+                                                    type="file"
+                                                    accept="image/*"
+                                                    name={'description' + ele}
+                                                    onChange={(e) => {
+                                                        e.preventDefault();
+                                                        onToolDescriptionChange(e)
+                                                    }}
+                                                    id="formFile" />
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
@@ -1536,6 +1703,18 @@ const add = () => {
                             })
                         }
                     </div>
+
+                    {
+                        progress ?
+                            <div class="w-full bg-neutral-200 dark:bg-red-500 m-1">
+                                <div
+                                    class="bg-primary p-0.5 text-center text-xs font-medium leading-none text-primary-100"
+                                >
+                                    {progress}
+                                </div>
+                            </div>
+                            : null
+                    }
 
                     <div className="flex justify-center space-x-2 m-1">
                         <button
