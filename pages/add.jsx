@@ -875,6 +875,13 @@ const add = () => {
                                                                                             <option value="">Select </option>
                                                                                             <option value="Milling face dent" > Milling face dent </option>
 
+                                                                                  </> : production["loss_criteria" + ele] == "PDT" ?
+                                                                                      <>
+                                                                                         <option value="">Select </option>
+                                                                                         <option value="No Input material" > No Input material </option>
+                                                                                         <option value="No Engine Plan" > No Engine Plan</option>
+                                                                                         <option value="No Empty Bin" > No Empty Bin </option>
+                                                     
 
                                                                                         </> : production["loss_criteria" + ele] == "Others" ?
                                                                                             <>
