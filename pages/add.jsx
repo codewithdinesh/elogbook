@@ -101,7 +101,7 @@ const add = () => {
         // console.log(production)
     }
 
-    const onCalculateTotal = (e) => {
+    const onCalculateTotal = () => {
 
         var total_production = 0, total_actual_production = 0, total_loss = 0, total_time = 0;
 
@@ -228,7 +228,6 @@ const add = () => {
 
         files.forEach((e) => {
             // console.log(e[1].name)
-            const name = e[0];
 
             const storageRef = ref(storage, `/files/${e[1].name}`);
 
@@ -250,12 +249,15 @@ const add = () => {
                 () => {
                     // download url
                     getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                        console.log(url);
+
+                        const name = e[0];
 
                         setToolDescriptionImages({
                             ...toolDescriptionImages,
                             [name]: url
-                        })
+                        });
+
+                        console.log(url);
                     });
                 }
             );
@@ -276,6 +278,7 @@ const add = () => {
 
         const ref = doc(db, `production`, date, details.cell_index, shift);
 
+        onCalculateTotal();
 
         const data =
         {
@@ -305,11 +308,8 @@ const add = () => {
 
 
         await setDoc(ref, data, { merge: true }).then(res => {
-            if (res) {
-                toast("Data Added")
-            } else {
-                toast("something went wrong")
-            }
+
+            toast("Data Added")
 
 
         }).catch(e => {
