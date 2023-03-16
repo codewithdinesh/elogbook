@@ -188,7 +188,7 @@ const add = () => {
 
     }
     // hrs details
-    const hrs = [1, 2, "Tea I", 3, 4, "Lunch", 5, 6, "Tea II", 7, 8];
+    const hrs = [1, 2, "Tea I", 3, 4, "Lunch", 5, 6, "Tea II", 7, 8, "Total"];
 
 
     return (
@@ -793,7 +793,7 @@ const add = () => {
                                                                 </> : production["effect_on" + ele] == "Shutdown" ?
                                                                     <>
                                                                         <option value="">Select </option>
-                                                                        <option value="Shutdown" > Shutdown</option>
+                                                                        <option value="PDT" > PDT</option>
 
 
                                                                     </> : production["effect_on" + ele] == "Other" ?
@@ -897,6 +897,13 @@ const add = () => {
                                                                                             <option value="">Select </option>
                                                                                             <option value="Milling face dent" > Milling face dent </option>
 
+                                                                                  </> : production["loss_criteria" + ele] == "PDT" ?
+                                                                                      <>
+                                                                                         <option value="">Select </option>
+                                                                                         <option value="No Input material" > No Input material </option>
+                                                                                         <option value="No Engine Plan" > No Engine Plan</option>
+                                                                                         <option value="No Empty Bin" > No Empty Bin </option>
+                                                     
 
                                                                                         </> : production["loss_criteria" + ele] == "Others" ?
                                                                                             <>
@@ -1367,6 +1374,7 @@ const add = () => {
                                     placeholder="" >
 
                                 </input>
+                                
                             </div>
                         </div>
 
@@ -1392,6 +1400,7 @@ const add = () => {
 
                         <div className="col-span-3 border border-slate-500 text-black    flex items-center justify-center font-semibold">
                             Tool Description
+                          
                         </div>
 
                         <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
@@ -1418,6 +1427,7 @@ const add = () => {
                                             placeholder="" >
 
                                         </input>
+                                      
                                     </div>
 
                                     <div className="col-span-2 border border-slate-500 text-black    flex items-center justify-center font-semibold">
@@ -1434,7 +1444,7 @@ const add = () => {
                                     </div>
 
                                     <div className="col-span-3 border border-slate-500 text-black    flex items-center justify-center font-semibold">
-                                        <input type="text"
+                                        <input type="Text"
                                             name={"tool_dec_" + ele}
                                             onChange={(e) => {
                                                 e.preventDefault();
@@ -1444,6 +1454,9 @@ const add = () => {
                                             placeholder="" >
 
                                         </input>
+                                      <input type="file"
+                           accept="image/png, image/jpeg">
+                          </input>
                                     </div>
 
                                     <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
