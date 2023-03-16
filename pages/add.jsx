@@ -28,11 +28,16 @@ const add = () => {
     const [date, setDate] = useState("");
     const [shift, setShift] = useState("");
     const [details, setDetails] = useState({});
-    const [production, setProduction] = useState({});
+    const [production, setProduction] = useState({
+        "prod": 0,
+        "act_prod": 0,
+        "loss": 0
+    });
     const [rejections, setRejections] = useState({});
     const [qsr, setQsr] = useState({});
     const [totalChanges, setTotalChanges] = useState({});
     const [messsages, setMessages] = useState({});
+    const [total, setTotal] = useState({});
 
 
     const onAdd = () => {
@@ -80,7 +85,24 @@ const add = () => {
             ...production,
             [name]: value
         });
+
         console.log(production)
+
+        {
+
+            hrs.map(ele => {
+                var prod = production["prod" + ele]
+                var act_prod = production["act_prod" + ele]
+                var loss = production["loss" + ele]
+
+                setTotal({
+                    "prod": parseInt(total.prod) + prod,
+                    "act_prod": total.act_prod + act_prod,
+                    "loss": total.loss + loss
+                })
+            })
+
+        }
 
     }
 
@@ -166,7 +188,7 @@ const add = () => {
 
     }
     // hrs details
-    const hrs = [1, 2, "Tea I", 3, 4, "Lunch", 5, 6, "Tea II", 7, 8, "Total"];
+    const hrs = [1, 2, "Tea I", 3, 4, "Lunch", 5, 6, "Tea II", 7, 8];
 
 
     return (
@@ -655,7 +677,7 @@ const add = () => {
                                                 onChange={(e) => {
                                                     e.preventDefault();
 
-                                                    
+
                                                     if (e.target.value == NaN || e.target.value == undefined || e.target.value == "") {
 
                                                     } else {
@@ -932,6 +954,19 @@ const add = () => {
                                 </div>
                             })
                         }
+
+                        <div className='grid grid-cols-12 font-semibold'>
+
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1">Total</div>
+                            <div className="border border-slate-500 text-black col-span-2 md:col-span-2 md:p-2.5 p-1"></div>
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1">
+                                {total.prod}
+                            </div>
+
+
+                        </div>
+
+
 
                     </div>
 
