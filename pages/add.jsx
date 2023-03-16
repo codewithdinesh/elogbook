@@ -771,7 +771,7 @@ const add = () => {
                                                                 </> : production["effect_on" + ele] == "Shutdown" ?
                                                                     <>
                                                                         <option value="">Select </option>
-                                                                        <option value="Shutdown" > Shutdown</option>
+                                                                        <option value="PDT" > PDT</option>
 
 
                                                                     </> : production["effect_on" + ele] == "Other" ?
