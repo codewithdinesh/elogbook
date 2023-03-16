@@ -23,11 +23,10 @@ const add = () => {
         }
     }, [authUser, loading]);
 
-
-
     const [date, setDate] = useState("");
     const [shift, setShift] = useState("");
     const [details, setDetails] = useState({});
+
     const [production, setProduction] = useState({
         "prod": 0,
         "act_prod": 0,
@@ -897,30 +896,30 @@ const add = () => {
                                                                                             <option value="">Select </option>
                                                                                             <option value="Milling face dent" > Milling face dent </option>
 
-                                                                                  </> : production["loss_criteria" + ele] == "PDT" ?
-                                                                                      <>
-                                                                                         <option value="">Select </option>
-                                                                                         <option value="No Input material" > No Input material </option>
-                                                                                         <option value="No Engine Plan" > No Engine Plan</option>
-                                                                                         <option value="No Empty Bin" > No Empty Bin </option>
-                                                     
-
-                                                                                        </> : production["loss_criteria" + ele] == "Others" ?
+                                                                                        </> : production["loss_criteria" + ele] == "PDT" ?
                                                                                             <>
                                                                                                 <option value="">Select </option>
-                                                                                                <option value="Start up/ warm up/ daily jh" > Start up/ warm up/ daily Jh</option>
-                                                                                                <option value="single side running" >Single side running</option>
-                                                                                                <option value="Break work other cell" >Break work other cell </option>
-                                                                                                <option value="Inventory clear" > Inventory clear </option>
-                                                                                                <option value="New model trial" >New model trial</option>
-                                                                                                <option value="weekly jh makino & Frd" >weekly jh makino & frd</option>
-                                                                                                <option value="Robo C.D MLH" > Robo C.D MLH</option>
-                                                                                                <option value="Robo c.D. MRH" >Robo C.D MRH</option>
-                                                                                                <option value="Robo C.D Frd RH" > Robo C.D Frd RH </option>
-                                                                                                <option value="Robo C.D Frd LH" > Robo C.D Frd LH </option>
-                                                                                                <option value="Robo C.D Frd RH" >Robo C.D Frd RH</option>
-                                                                                                <option value="New man Training" > New man Training </option>
-                                                                                            </> : null
+                                                                                                <option value="No Input material" > No Input material </option>
+                                                                                                <option value="No Engine Plan" > No Engine Plan</option>
+                                                                                                <option value="No Empty Bin" > No Empty Bin </option>
+
+
+                                                                                            </> : production["loss_criteria" + ele] == "Others" ?
+                                                                                                <>
+                                                                                                    <option value="">Select </option>
+                                                                                                    <option value="Start up/ warm up/ daily jh" > Start up/ warm up/ daily Jh</option>
+                                                                                                    <option value="single side running" >Single side running</option>
+                                                                                                    <option value="Break work other cell" >Break work other cell </option>
+                                                                                                    <option value="Inventory clear" > Inventory clear </option>
+                                                                                                    <option value="New model trial" >New model trial</option>
+                                                                                                    <option value="weekly jh makino & Frd" >weekly jh makino & frd</option>
+                                                                                                    <option value="Robo C.D MLH" > Robo C.D MLH</option>
+                                                                                                    <option value="Robo c.D. MRH" >Robo C.D MRH</option>
+                                                                                                    <option value="Robo C.D Frd RH" > Robo C.D Frd RH </option>
+                                                                                                    <option value="Robo C.D Frd LH" > Robo C.D Frd LH </option>
+                                                                                                    <option value="Robo C.D Frd RH" >Robo C.D Frd RH</option>
+                                                                                                    <option value="New man Training" > New man Training </option>
+                                                                                                </> : null
                                                 }
                                             </select>
 
@@ -1374,7 +1373,7 @@ const add = () => {
                                     placeholder="" >
 
                                 </input>
-                                
+
                             </div>
                         </div>
 
@@ -1400,7 +1399,7 @@ const add = () => {
 
                         <div className="col-span-3 border border-slate-500 text-black    flex items-center justify-center font-semibold">
                             Tool Description
-                          
+
                         </div>
 
                         <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
@@ -1427,7 +1426,7 @@ const add = () => {
                                             placeholder="" >
 
                                         </input>
-                                      
+
                                     </div>
 
                                     <div className="col-span-2 border border-slate-500 text-black    flex items-center justify-center font-semibold">
@@ -1454,9 +1453,9 @@ const add = () => {
                                             placeholder="" >
 
                                         </input>
-                                      <input type="file"
-                           accept="image/png, image/jpeg">
-                          </input>
+                                        <input type="file"
+                                            accept="image/png, image/jpeg">
+                                        </input>
                                     </div>
 
                                     <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
