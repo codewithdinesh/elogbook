@@ -166,7 +166,7 @@ const add = () => {
 
     }
     // hrs details
-    const hrs = [1, 2, "Tea I", 3, 4, "Lunch", 5, 6, "Tea II", 7, 8, "Total"];
+    const hrs = [1, 2,  3, 4, 5, 6, 7, 8,"TeaI","Lunch","TeaII","Total"];
 
 
     return (
