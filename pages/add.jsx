@@ -378,7 +378,7 @@ const add = () => {
                                 <option value="shift2">Shift 2</option>
                                 <option value="shift3">Shift 3</option>
                                 <option value="shift2+OT">Shift2+OT</option>
-                                <option value="shift1+OT">Shift1+OT</option>
+                                <option value="Shift3+OT">Shift3+OT</option>
 
                             </select>
 
