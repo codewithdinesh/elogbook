@@ -13,7 +13,7 @@ const Sheet = ({ sheet }) => {
 
 
     // hrs details
-    const hrs = [1, 2, "Tea I", 3, 4, "Lunch", 5, 6, "Tea II", 7, 8, "Total"];
+    const hrs = [1, 2, 3, 4, 5, 6, 7, 8, "Tea I", "Lunch", "Tea II", "Total"];
 
 
     return (
@@ -64,14 +64,13 @@ const Sheet = ({ sheet }) => {
                         <div className=' col-span-12 md:col-span-8 grid  grid-cols-12  md:grid-cols-8 row-span-3 '>
 
                             {/* entries 1 */}
+                            {/* Titles */}
                             <div className="border border-slate-500 text-black rounded-lg m-1  row-span-3 md:row-span-2 col-span-2 md:col-span-1 p-1 text-center flex items-center justify-center">Cell Name</div>
 
                             <div className="border border-slate-500 text-black rounded-lg m-1 col-span-5 md:col-span-2 p-2.5 flex items-center justify-center">Name</div>
                             <div className="border border-slate-500 text-black rounded-lg m-1  col-span-5 md:col-span-1 p-2.5 flex items-center justify-center">Sign</div>
                             <div className="border border-slate-500 text-black rounded-lg m-1 hidden md:flex col-span-3 p-2.5 items-center justify-center">Name</div>
                             <div className="border border-slate-500 text-black rounded-lg m-1 col-span-2 md:col-span-1 hidden md:flex p-2.5 items-center justify-center">Sign</div>
-
-
 
                             {/*  entrie 2 */}
                             <div className="border border-slate-500 text-black rounded-lg m-1 col-span-5 md:col-span-2">
@@ -210,7 +209,7 @@ const Sheet = ({ sheet }) => {
 
                         </div>
 
-                        {/* Overall details */}
+                        {/* Overall details -shift ,hrs rate, manpower */}
                         <div className='col-span-12 grid md:col-span-4  grid-cols-4 row-span-3 '>
 
                             <div className="border border-slate-500 text-black rounded-lg m-1 col-span-2 p-1 text-center flex items-center justify-center">Shift</div>
@@ -276,11 +275,19 @@ const Sheet = ({ sheet }) => {
 
                         {/* Titles of production */}
                         <div className='grid grid-cols-12 font-semibold'>
-                            <div className="border border-slate-500 text-black col-span-2 md:col-span-1 p-2.5">Hr.</div>
-                            <div className="border border-slate-500 text-black  col-span-2 md:col-span-1 p-2.5">Prod.</div>
-                            <div className="border border-slate-500 text-black  col-span-2 p-2.5 md:col-span-1">Cum. Prod.</div>
-                            <div className="border border-slate-500 text-black  col-span-2 md:col-span-1 p-2.5 ">Prod. Loss</div>
-                            <div className="border border-slate-500 text-black  col-span-4 md:col-span-8 p-2.5">Loss Reason</div>
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1">Hr.</div>
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Man/Hr</div>
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Models</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Prod.</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:p-2.5 p-1 md:col-span-1 overflow-hidden"> Act. Prod.</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Prod. Loss</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Area of mc.</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Effect on</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Loss criteria</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Loss Details</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Start timing </div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">stop timing</div>
+
                         </div>
 
                         {/* Data entries for production */}
@@ -293,55 +300,178 @@ const Sheet = ({ sheet }) => {
                                         {ele}
                                     </div>
 
-                                    {/* Production */}
-                                    <div className="border border-slate-500 text-black   col-span-2 md:col-span-1">
-                                        <input type="text"
-                                            disabled
-                                            value={sheet?.production["prod" + ele]}
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                        >
+                                    <>
+                                        {/* Man per hrs */}
+                                        <div className="border border-slate-500 text-black  col-span-1 ">
+                                            <input
+                                                disabled
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                value={sheet?.production?.production["man_per_hr" + ele]}
+                                            >
+                                            </input>
 
-                                        </input>
-                                    </div>
+                                        </div>
 
-                                    {/* cum. production */}
-                                    <div className="border border-slate-500 text-black col-span-2 md:col-span-1">
-                                        <input type="text"
-                                            disabled
-                                            value={sheet?.production["cum_prod" + ele]}
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                            placeholder="" >
+                                        {/* models */}
+                                        <div className="border border-slate-500 text-black  col-span-1 ">
+                                            <input
+                                                disabled
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                value={sheet?.production?.production["models" + ele]}
+                                            >
+                                            </input>
 
-                                        </input>
-                                    </div>
+                                        </div>
 
-                                    {/* Production loss */}
-                                    <div className="border border-slate-500 text-black  col-span-2 md:col-span-1">
-                                        <input type="text"
-                                            disabled
-                                            value={sheet?.production["prod_loss" + ele]}
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                            placeholder="" >
+                                        {/* Production */}
+                                        <div className="border border-slate-500 text-black   col-span-1">
+                                            <input type="text"
+                                                disabled
+                                                value={sheet?.production?.production["production" + ele]}
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                            >
 
-                                        </input>
-                                    </div>
+                                            </input>
+                                        </div>
+
+                                        {/* Act. production */}
+                                        <div className="border border-slate-500 text-black col-span-1">
+                                            <input type="text"
+                                                disabled
+                                                value={sheet?.production?.production["actual_production" + ele]}
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                            >
+
+                                            </input>
+                                        </div>
+
+                                        {/* Production loss */}
+                                        <div className="border border-slate-500 text-black  col-span-1">
+
+                                            <input
+                                                disabled
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                value={sheet?.production?.production["production_loss" + ele]}
+                                            >
+                                            </input>
 
 
-                                    {/* Production loss reason */}
-                                    <div className="border border-slate-500 text-black  col-span-4 md:col-span-8">
+                                        </div>
 
-                                        <input type="text"
-                                            disabled
-                                            value={sheet?.production["prod_loss_reason" + ele]}
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                            placeholder="" >
 
-                                        </input>
+                                        {/* Area of mc */}
+                                        <div className="border border-slate-500 text-black  col-span-1 ">
+                                            <input
+                                                disabled
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                value={sheet?.production?.production["area_of_mc" + ele]}
+                                            >
+                                            </input>
 
-                                    </div>
+                                        </div>
+
+                                        {/* Effect on */}
+                                        <div className="border border-slate-500 text-black  col-span-1 ">
+                                            <input
+                                                disabled
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                value={sheet?.production?.production["effect_on" + ele]}
+                                                name={"effect_on" + ele}
+                                            >
+                                            </input>
+
+                                        </div>
+
+                                        {/* loss criteria */}
+                                        <div className="border border-slate-500 text-black  col-span-1 ">
+                                            <input
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                disabled
+                                                value={sheet?.production?.production["loss_criteria" + ele]}
+                                            >
+
+                                            </input>
+                                        </div>
+
+                                        {/* Production loss reason */}
+                                        <div className="border border-slate-500 text-black  col-span-1 ">
+
+                                            <input
+                                                disabled
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                value={sheet?.production?.production["production_loss_reason" + ele]}
+                                            >
+
+
+                                            </input>
+
+                                        </div>
+
+                                        {/* start timing */}
+                                        <div className="border border-slate-500 text-black   col-span-1">
+                                            <input
+
+                                                disabled
+                                                value={sheet?.production?.production["start_timing" + ele]}
+
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                            >
+
+                                            </input>
+                                        </div>
+
+                                        {/* stop timing */}
+                                        <div className="border border-slate-500 text-black   col-span-1">
+                                            <input
+                                                disabled
+                                                value={sheet?.production?.production["stop_timing" + ele]}
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                            >
+                                            </input>
+                                        </div>
+
+
+                                    </>
                                 </div>
                             })
                         }
+
+                        <div className='grid grid-cols-12 font-semibold grid-rows-1'>
+
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1">Total</div>
+                            <div className="border border-slate-500 text-black col-span-2 md:col-span-2 md:p-2.5 p-1">
+                            </div>
+
+                            {/* total production */}
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1">
+                                {sheet?.production?.total["total_production"]}
+                            </div>
+
+                            {/* Total actual production */}
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1">
+                                {sheet?.production?.total["total_actual_production"]}
+
+                            </div>
+
+                            {/* Total loss */}
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1">
+                                {sheet?.production?.total?.["total_loss"]}
+
+                            </div>
+
+                            <div className="border border-slate-500 text-black col-span-4 md:p-2.5 p-1">
+
+                            </div>
+
+
+                            {/* Total Time*/}
+                            <div className="border border-slate-500 text-black col-span-2 md:p-2.5 p-1">
+                                Total Time : {sheet?.production?.total?.["total_time"]}
+                                (minutes)
+                            </div>
+
+
+                        </div>
 
                     </div>
 
@@ -562,7 +692,7 @@ const Sheet = ({ sheet }) => {
 
                     <div className="col-span-12 grid grid-cols-12">
                         <div className=" border-slate-500 text-black  col-span-12  font-semibold">
-                            QCR
+                            QSR
                         </div>
 
                         <div className="col-span-8 grid grid-cols-7 grid-rows-3">
@@ -581,96 +711,46 @@ const Sheet = ({ sheet }) => {
 
                             {/* Entries1 */}
 
-                            <div className="col-span-2 border border-slate-500 text-black    flex items-center justify-center font-semibold">
-                                <input type="text"
-                                    disabled
-                                    value={sheet?.qsr?.partname_1}
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                    placeholder="" >
+                            {/* Entries1 */}
 
-                                </input>
-                            </div>
-                            <div className="col-span-1 border border-slate-500 text-black  flex items-center justify-center font-semibold">
-                                <input type="text"
-                                    disabled
-                                    value={sheet?.qsr?.qty_1}
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                    placeholder="" >
+                            {
+                                [1, 2, 3].map(ele => {
+                                    return <div className="col-span-8 grid grid-cols-7 " key={ele}>
+                                        <div className="col-span-2 border border-slate-500 text-black    flex items-center justify-center font-semibold">
 
-                                </input>
-                            </div>
-                            <div className="col-span-4 border border-slate-500 text-black  flex items-center justify-center font-semibold">
-                                <input type="text"
-                                    disabled
-                                    value={sheet?.qsr?.reason_1}
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                    placeholder="" >
+                                            <input type="text"
+                                                name={"partname_" + ele}
+                                                disabled
+                                                value={sheet?.qsr?.["partname_" + ele]}
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                placeholder="" >
 
-                                </input>
-                            </div>
+                                            </input>
+                                        </div>
 
-                            {/* entries 2 */}
-                            <div className="col-span-2 border border-slate-500 text-black    flex items-center justify-center font-semibold">
-                                <input type="text"
-                                    disabled
-                                    value={sheet?.qsr?.partname_2}
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                    placeholder="" >
 
-                                </input>
-                            </div>
+                                        <div className="col-span-1 border border-slate-500 text-black  flex items-center justify-center font-semibold">
+                                            <input type="text"
+                                                disabled
+                                                value={sheet?.qsr?.["qty_" + ele]}
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                placeholder="" >
 
-                            <div className="col-span-1 border border-slate-500 text-black  flex items-center justify-center font-semibold">
-                                <input type="text"
-                                    disabled
-                                    value={sheet?.qsr?.qty_2}
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                    placeholder="" >
+                                            </input>
+                                        </div>
 
-                                </input>
-                            </div>
+                                        <div className="col-span-4 border border-slate-500 text-black  flex items-center justify-center font-semibold">
+                                            <input type="text"
+                                                disabled
+                                                value={sheet?.qsr?.["reason_" + ele]}
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                placeholder="" >
 
-                            <div className="col-span-4 border border-slate-500 text-black  flex items-center justify-center font-semibold">
-                                <input type="text"
-                                    disabled
-                                    value={sheet?.qsr?.reason_2}
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                    placeholder="" >
-
-                                </input>
-                            </div>
-
-                            {/* entries 3 */}
-                            <div className="col-span-2 border border-slate-500 text-black    flex items-center justify-center font-semibold">
-                                <input type="text"
-
-                                    disabled
-                                    value={sheet?.qsr?.partname_3}
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                    placeholder="" >
-
-                                </input>
-                            </div>
-
-                            <div className="col-span-1 border border-slate-500 text-black  flex items-center justify-center font-semibold">
-                                <input type="text"
-                                    disabled
-                                    value={sheet?.qsr?.qty_3}
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                    placeholder="" >
-
-                                </input>
-                            </div>
-
-                            <div className="col-span-4 border border-slate-500 text-black  flex items-center justify-center font-semibold">
-                                <input type="text"
-                                    disabled
-                                    value={sheet?.qsr?.reason_3}
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                    placeholder="" >
-
-                                </input>
-                            </div>
+                                            </input>
+                                        </div>
+                                    </div>
+                                })
+                            }
                         </div>
 
 
@@ -773,7 +853,7 @@ const Sheet = ({ sheet }) => {
                                     <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
                                         <input type="text"
                                             disabled
-                                            value={sheet?.total_changes["sr_no" + ele]}
+                                            value={sheet?.total_changes?.totalChanges["sr_no_" + ele]}
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
                                             placeholder="" >
 
@@ -783,17 +863,18 @@ const Sheet = ({ sheet }) => {
                                     <div className="col-span-2 border border-slate-500 text-black    flex items-center justify-center font-semibold">
                                         <input type="text"
                                             disabled
-                                            value={sheet?.total_changes["machine_" + ele]}
+                                            value={sheet?.total_changes?.totalChanges["machine_" + ele]}
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
                                             placeholder="" >
 
                                         </input>
                                     </div>
 
+                                    {/* image */}
                                     <div className="col-span-3 border border-slate-500 text-black    flex items-center justify-center font-semibold">
                                         <input type="text"
                                             disabled
-                                            value={sheet?.total_changes["tool_dec_" + ele]}
+                                            value={sheet?.total_changes?.totalChanges["tool_dec_" + ele] || "Image Not Found.."}
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
                                             placeholder="" >
 
@@ -803,7 +884,7 @@ const Sheet = ({ sheet }) => {
                                     <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
                                         <input type="text"
                                             disabled
-                                            value={sheet?.total_changes["tool_life_" + ele]}
+                                            value={sheet?.total_changes?.totalChanges["tool_life_" + ele]}
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
                                             placeholder="" >
 
@@ -813,7 +894,7 @@ const Sheet = ({ sheet }) => {
                                     <div className="col-span-3 border border-slate-500 text-black    flex items-center justify-center font-semibold">
                                         <input type="text"
                                             disabled
-                                            value={sheet?.total_changes["remark_" + ele]}
+                                            value={sheet?.total_changes?.totalChanges["remark_" + ele]}
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
                                             placeholder="" >
 
@@ -848,7 +929,7 @@ const Sheet = ({ sheet }) => {
                                     <div className="col-span-3 border border-slate-500 text-black    flex items-center justify-center font-semibold">
                                         <input type="text"
                                             disabled
-                                            value={sheet?.messages["sr_no_" + ele]}
+                                            value={sheet?.messages?.["sr_no_" + ele]}
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
                                             placeholder="" >
 
@@ -859,7 +940,7 @@ const Sheet = ({ sheet }) => {
                                         <input type="text"
 
                                             disabled
-                                            value={sheet?.messages["message_" + ele]}
+                                            value={sheet?.messages?.["message_" + ele]}
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
                                             placeholder="" >
 

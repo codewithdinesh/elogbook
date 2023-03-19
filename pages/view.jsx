@@ -12,8 +12,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function view() {
 
-    const [date, setDate] = useState();
-    const [shift, setShift] = useState();
+    const [date, setDate] = useState("");
+    const [shift, setShift] = useState("");
+    const [cell, setCell] = useState("");
     const [sheet, setSheet] = useState();
 
     const { authUser, loading } = useAuth();
@@ -27,17 +28,21 @@ function view() {
     const onSearch = (e) => {
         e.preventDefault();
 
-        // alert(date + shift)
-
         if (!date || date == "") {
-            // toast("Choose Date!");
+
             toast.error("choose Date !!");
 
-        } else if (!shift || shift == "") {
+        }
+        else if (!shift || shift == "") {
             toast.error("choose Shift!!");
+        }
+        else if (!cell || cell == "") {
+            toast.error("choose cell!!");
+
         } else {
 
             loadData();
+
         }
     }
 
@@ -45,8 +50,10 @@ function view() {
     const loadData = async () => {
         // const date = new Date().toJSON().slice(0, 10);
 
-        const docRef = doc(db, "production", date);
+        const docRef = doc(db, "production", date, cell, shift);
+
         console.log("working...")
+
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
@@ -55,17 +62,8 @@ function view() {
 
             const data = docSnap.data();
 
-
-            // doc.data() will be undefined in this case
-            if (data[shift] == undefined || data[shift] == "") {
-                toast.info("Sheet Not Found...")
-                setSheet("")
-
-            } else {
-                setSheet(data[shift]);
-
-            }
-            // console.log()
+            setSheet({});
+            setSheet(data);
 
 
         } else {
@@ -106,7 +104,7 @@ function view() {
                 <div className='flex flex-col  md:flex-row px-2 justify-center items-center content-center'>
 
                     {/* Date choose */}
-                    <div className=" flex-1  rounded-lg m-1  col-span-6 md:col-span-2  p-1  h-15 w-full">
+                    <div className=" flex-1  rounded-lg m-1   p-1  h-15 w-full">
                         <h1 className=' font-semibold uppercase text-white'> Date: </h1>
 
                         {/* Date picker */}
@@ -124,47 +122,85 @@ function view() {
                         </div>
                     </div>
 
-                    {/* Shift */}
-                    <div className="flex-1 rounded-lg  col-span-6 md:col-span-2 p-1 m-1 h-15 w-full">
-                        <h1 className=' font-semibold uppercase m-0 text-white'> Shift: </h1>
+                    {/* cell */}
+                    {/*  cell index */}
+                    <div className="border border-slate-500 text-black rounded-lg m-1 flex-1">
+                        <h1 className=' font-semibold uppercase text-white'> Cell: </h1>
 
                         <select
-
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            name="cell_index"
                             onChange={(e) => {
                                 e.preventDefault();
-                                setShift(e.target.value);
+                                setCell(e.target.value);
                             }}
+                        >
+                            <option value="" >select option</option>
+                            <option value="C3" >C3</option>
+                            <option value="C5">C5</option>
+                            <option value="C6">C6</option>
 
+                            <option value="B1">B1</option>
+                            <option value="B2">B2</option>
+                            <option value="B3">B3</option>
+                            <option value="B4">B4</option>
+                            <option value="B5">B5</option>
+
+                            <option value="H1">H1</option>
+                            <option value="H2">H2</option>
+                            <option value="H3">H3</option>
+                            <option value="H4">H4</option>
+                            <option value="H5">H5</option>
+                            <option value="H6">H6</option>
+                            <option value="H7">H7</option>
+                            <option value="H8">H8</option>
+
+
+                        </select>
+
+                    </div>
+
+                    {/* Shift */}
+                    <div className="border border-slate-500 text-black rounded-lg flex-1">
+                        <h1 className=' font-semibold uppercase text-white'> Shift: </h1>
+
+
+                        <select
+                            id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            onChange={(e) => {
+                                e.preventDefault();
+                                setShift(e.target.value)
+                            }}
                         >
                             <option value="" >select option</option>
                             <option value="shift1" >Shift 1</option>
                             <option value="shift2">Shift 2</option>
                             <option value="shift3">Shift 3</option>
+                            <option value="shift2+OT">Shift2+OT</option>
+                            <option value="Shift3+OT">Shift3+OT</option>
 
                         </select>
-
 
                     </div>
 
                     <button
-                        className="m-1 border justify-center mb-1 flex-1 z-[2] flex items-center rounded-lg bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+                        className="m-1 h-full border justify-center  flex-1 z-[2] flex items-center rounded-lg bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
                         type="button"
                         onClick={(e) => {
                             onSearch(e);
 
                         }}
                     >
-                        <span className='p-1 md:hidden'>Search</span>
+                        <span className='p-1 mx-1'>Search</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
                             className="h-5 w-5">
                             <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
-                                clip-rule="evenodd" />
+                                clipRule="evenodd" />
                         </svg>
                     </button>
                 </div>
