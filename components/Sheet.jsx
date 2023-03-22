@@ -31,7 +31,7 @@ const Sheet = ({ sheet }) => {
                         {/* row 1 */}
                         {/* Heading */}
 
-                        <div className="border border-slate-800 text-black rounded-lg m-1  col-span-12 md:col-span-8 flex justify-center items-center row-span-full md:row-span-1 p-2 ">
+                        <div className="border border-slate-500 text-black rounded-lg m-1  col-span-12 md:col-span-8 flex justify-center items-center row-span-full md:row-span-1 p-2 ">
                             <h1 className=' font-semibold uppercase block '> Daily Production Report</h1>
                         </div>
 
