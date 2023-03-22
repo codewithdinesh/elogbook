@@ -31,7 +31,7 @@ const Sheet = ({ sheet }) => {
                         {/* row 1 */}
                         {/* Heading */}
 
-                        <div className="border border-slate-500 text-black rounded-lg m-1  col-span-12 md:col-span-8 flex justify-center items-center row-span-full md:row-span-1 p-2 ">
+                        <div className="border border-slate-800 text-black rounded-lg m-1  col-span-12 md:col-span-8 flex justify-center items-center row-span-full md:row-span-1 p-2 ">
                             <h1 className=' font-semibold uppercase block '> Daily Production Report</h1>
                         </div>
 
@@ -275,18 +275,18 @@ const Sheet = ({ sheet }) => {
 
                         {/* Titles of production */}
                         <div className='grid grid-cols-12 font-semibold'>
-                            <div className="border border-slate-200 text-black col-span-1 md:col-span-1 md:p-2.5 p-1">Hr.</div>
-                            <div className="border border-slate-200 text-black col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Man/Hr</div>
-                            <div className="border border-slate-200 text-black col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Models</div>
-                            <div className="border border-slate-200 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Prod.</div>
-                            <div className="border border-slate-200 text-black  col-span-1 md:p-2.5 p-1 md:col-span-1 overflow-hidden"> Act. Prod.</div>
-                            <div className="border border-slate-200 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Prod. Loss</div>
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1">Hr.</div>
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Man/Hr</div>
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Models</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Prod.</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:p-2.5 p-1 md:col-span-1 overflow-hidden"> Act. Prod.</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Prod. Loss</div>
                             <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Area of mc.</div>
                             <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Effect on</div>
                             <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Loss criteria</div>
-                            <div className="border border-slate-800 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Loss Details</div>
-                            <div className="border border-slate-200 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Start timing </div>
-                            <div className="border border-slate-200 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">stop timing</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Loss Details</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Start timing </div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">stop timing</div>
 
                         </div>
 
