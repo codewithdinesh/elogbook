@@ -1589,10 +1589,10 @@ const add = () => {
                     {/* Tool Change Details */}
                     <div className="col-span-12 grid grid-cols-10 mt-2">
 
-                        {/* Title of table change details */}
+                        {/* Title of tool change details */}
 
                         <div className=" border-slate-500 text-black  col-span-12  font-semibold">
-                            Total Change Details
+                            Tool Change Details
                         </div>
 
                         <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
@@ -1603,7 +1603,7 @@ const add = () => {
                             Machine
                         </div>
 
-                        <div className="col-span-3 border border-slate-500 text-black    flex items-center justify-center font-semibold">
+                        <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
                             Tool Description
 
                         </div>
