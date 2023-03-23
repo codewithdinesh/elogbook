@@ -1608,7 +1608,7 @@ const add = () => {
 
                         </div>
 
-                        <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
+                        <div className="col-span-2 border border-slate-500 text-black    flex items-center justify-center font-semibold">
                             Tool Life
                         </div>
 
