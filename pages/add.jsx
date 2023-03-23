@@ -1586,7 +1586,7 @@ const add = () => {
                     </div>
 
 
-                    {/* Total Change Details */}
+                    {/* Tool Change Details */}
                     <div className="col-span-12 grid grid-cols-10 mt-2">
 
                         {/* Title of table change details */}
