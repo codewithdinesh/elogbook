@@ -742,18 +742,18 @@ const add = () => {
 
                         {/* Titles of production */}
                         <div className='grid grid-cols-12 font-semibold'>
-                            <div className="border border-slate-300 text-black col-span-1 md:col-span-1 md:p-2.5 p-1">Hr.</div>
-                            <div className="border border-slate-300 text-black col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Man/Hr</div>
-                            <div className="border border-slate-300 text-black col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Models</div>
-                            <div className="border border-slate-300 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Prod.</div>
-                            <div className="border border-slate-300 text-black  col-span-1 md:p-2.5 p-1 md:col-span-1 overflow-hidden"> Act. Prod.</div>
-                            <div className="border border-slate-300 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Prod. Loss</div>
-                            <div className="border border-slate-800 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Area of mc.</div>
-                            <div className="border border-slate-800 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Effect on</div>
-                            <div className="border border-slate-800 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Loss criteria</div>
-                            <div className="border border-slate-900 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Loss Details</div>
-                            <div className="border border-slate-300 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Start timing </div>
-                            <div className="border border-slate-300 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">stop timing</div>
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1">Hr.</div>
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Man/Hr</div>
+                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Models</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Prod.</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:p-2.5 p-1 md:col-span-1 overflow-hidden"> Act. Prod.</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Prod. Loss</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Area of mc.</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Effect on</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Loss criteria</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Loss Details</div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">Start timing </div>
+                            <div className="border border-slate-500 text-black  col-span-1 md:col-span-1 md:p-2.5 p-1 overflow-hidden">stop timing</div>
 
                         </div>
 
@@ -764,7 +764,7 @@ const add = () => {
                                 return <div className='grid grid-cols-12' key={ele}>
 
                                     {/* Hrs */}
-                                    <div className="border border-slate-300 text-black  col-span-1 md:col-span-1  flex items-center justify-center font-semibold" >
+                                    <div className="border border-slate-500 text-black  col-span-1 md:col-span-1  flex items-center justify-center font-semibold" >
                                         {ele}
                                     </div>
 
@@ -773,7 +773,7 @@ const add = () => {
                                     <>
 
                                         {/* Man per hrs */}
-                                        <div className="border border-slate-300 text-black  col-span-1 ">
+                                        <div className="border border-slate-500 text-black  col-span-1 ">
                                             <select
                                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 name={"man_per_hr" + ele}
@@ -795,7 +795,7 @@ const add = () => {
                                         </div>
 
                                         {/* models */}
-                                        <div className="border border-slate-300 text-black  col-span-1 ">
+                                        <div className="border border-slate-500 text-black  col-span-1 ">
                                             <select
                                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 name={"models" + ele}
@@ -815,7 +815,7 @@ const add = () => {
                                         </div>
 
                                         {/* Production */}
-                                        <div className="border border-slate-300 text-black   col-span-1">
+                                        <div className="border border-slate-500 text-black   col-span-1">
                                             <input type="text"
                                                 name={"production" + ele}
                                                 onChange={(e) => {
@@ -829,7 +829,7 @@ const add = () => {
                                         </div>
 
                                         {/* Act. production */}
-                                        <div className="border border-slate-300 text-black col-span-1">
+                                        <div className="border border-slate-500 text-black col-span-1">
                                             <input type="text"
                                                 name={"actual_production" + ele}
                                                 onChange={(e) => {
@@ -843,7 +843,7 @@ const add = () => {
                                         </div>
 
                                         {/* Production loss */}
-                                        <div className="border border-slate-300 text-black  col-span-1">
+                                        <div className="border border-slate-500 text-black  col-span-1">
 
                                             <select
                                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -867,7 +867,7 @@ const add = () => {
 
 
                                         {/* Area of mc */}
-                                        <div className="border border-slate-800 text-black  col-span-1 ">
+                                        <div className="border border-slate-500 text-black  col-span-1 ">
                                             <Select
                                                 id={ele + "random"}
                                                 instanceId={ele + "random"}
@@ -906,7 +906,7 @@ const add = () => {
                                         </div>
 
                                         {/* Effect on */}
-                                        <div className="border border-slate-800 text-black  col-span-1 ">
+                                        <div className="border border-slate-500 text-black  col-span-1 ">
                                             <select
                                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 name={"effect_on" + ele}
@@ -926,7 +926,7 @@ const add = () => {
                                         </div>
 
                                         {/* loss criteria */}
-                                        <div className="border border-slate-800 text-black  col-span-1 ">
+                                        <div className="border border-slate-500 text-black  col-span-1 ">
                                             <select
                                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 name={"loss_criteria" + ele}
@@ -976,7 +976,7 @@ const add = () => {
                                         </div>
 
                                         {/* Production loss reason */}
-                                        <div className="border border-slate-900 text-black  col-span-1 ">
+                                        <div className="border border-slate-500 text-black  col-span-1 ">
 
                                             <select
                                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -1098,7 +1098,7 @@ const add = () => {
                                         </div>
 
                                         {/* start timing */}
-                                        <div className="border border-slate-300 text-black   col-span-1">
+                                        <div className="border border-slate-500 text-black   col-span-1">
                                             <input
                                                 type='time'
                                                 name={"start_timing" + ele}
@@ -1113,7 +1113,7 @@ const add = () => {
                                         </div>
 
                                         {/* stop timing */}
-                                        <div className="border border-slate-300 text-black   col-span-1">
+                                        <div className="border border-slate-500 text-black   col-span-1">
                                             <input
                                                 type='time'
                                                 name={"stop_timing" + ele}
