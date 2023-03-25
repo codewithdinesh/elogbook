@@ -29,14 +29,19 @@ const add = () => {
 
 
     const [date, setDate] = useState("");
+
     const [shift, setShift] = useState("");
+
     const [details, setDetails] = useState({});
 
     const [production, setProduction] = useState({});
 
     const [rejections, setRejections] = useState({});
+
     const [qsr, setQsr] = useState({});
+
     const [totalChanges, setTotalChanges] = useState({});
+
     const [messsages, setMessages] = useState({});
 
     const [toolDescription, setToolDescription] = useState({});
@@ -47,14 +52,8 @@ const add = () => {
     const [progress, setProgress] = useState(0);
 
     const [toolImages, setImages] = useState([]);
-    const [im, setIm] = useState("");
-    const [exe, setExe] = useState(false);
 
 
-    useEffect(() => {
-        console.log(toolImages)
-        setExe(true);
-    }, [toolImages])
 
 
     const onAdd = () => {
@@ -76,19 +75,10 @@ const add = () => {
 
         } else {
 
-            handleUpload();
+            // handleUpload();
 
+            addToFirebase();
 
-            const files = Object.entries(toolDescription);
-
-            console.log(files);
-
-
-            if (exe) {
-
-                addToFirebase();
-
-            }
         }
     }
 
@@ -238,10 +228,9 @@ const add = () => {
     const handleUpload = async () => {
 
         const files = Object.entries(toolDescription);
-        // console.log(files);
+        console.log(files);
 
         files.map(async (e) => {
-            // console.log(e[1].name)
 
             console.log(uuid());
 
@@ -261,6 +250,7 @@ const add = () => {
                     // update progress
                     setProgress(percent);
                     console.log("uploading:", percent);
+                    toast.done("" + percent)
                 },
 
                 (error) => console.log(error),
@@ -270,9 +260,9 @@ const add = () => {
 
                     console.log(e)
 
-                    let url = await getDownloadURL(uploadTask.snapshot.ref).then(val => {
+                    await getDownloadURL(uploadTask.snapshot.ref).then(val => {
                         console.log(val);
-                        setIm(val);
+                        toast.success("Images Upload Done.")
 
                         setImages((toolImages) => (
                             [
@@ -287,7 +277,7 @@ const add = () => {
 
                 (error) => {
                     // failed to get download URL
-                    toast("Something went wrong...");
+                    toast.error("Something went wrong...");
                     console.log(error);
                 }
             );
@@ -306,7 +296,7 @@ const add = () => {
         onCalculateTotal();
 
         console.log(toolImages);
-        console.log(im);
+        // console.log(im);
         const data =
         {
 
@@ -1362,7 +1352,7 @@ const add = () => {
                             <div className="col-span-2 border border-slate-500 text-black    flex items-center justify-center font-semibold">
                                 <input type="text"
 
-                                    name={"vender_rejection_partname_1 "}
+                                    name={"vender_rejection_partname_1"}
                                     onChange={(e) => {
                                         e.preventDefault();
                                         onChangeRejections(e)
@@ -1374,7 +1364,7 @@ const add = () => {
                             </div>
                             <div className="col-span-1 border border-slate-500 text-black  flex items-center justify-center font-semibold">
                                 <input type="text"
-                                    name={"vender_rejection_qty_1 "}
+                                    name={"vender_rejection_qty_1"}
                                     onChange={(e) => {
                                         e.preventDefault();
                                         onChangeRejections(e)
@@ -1386,7 +1376,7 @@ const add = () => {
                             </div>
                             <div className="col-span-3 border border-slate-500 text-black  flex items-center justify-center font-semibold">
                                 <input type="text"
-                                    name={"vender_rejection_reason_1 "}
+                                    name={"vender_rejection_reason_1"}
                                     onChange={(e) => {
                                         e.preventDefault();
                                         onChangeRejections(e)
@@ -1400,7 +1390,7 @@ const add = () => {
                             {/* entries 2 */}
                             <div className="col-span-2 border border-slate-500 text-black    flex items-center justify-center font-semibold">
                                 <input type="text"
-                                    name={"vender_rejection_partname_2 "}
+                                    name={"vender_rejection_partname_2"}
                                     onChange={(e) => {
                                         e.preventDefault();
                                         onChangeRejections(e)
@@ -1412,7 +1402,7 @@ const add = () => {
                             </div>
                             <div className="col-span-1 border border-slate-500 text-black  flex items-center justify-center font-semibold">
                                 <input type="text"
-                                    name={"vender_rejection_qty_2 "}
+                                    name={"vender_rejection_qty_2"}
                                     onChange={(e) => {
                                         e.preventDefault();
                                         onChangeRejections(e)
@@ -1424,7 +1414,7 @@ const add = () => {
                             </div>
                             <div className="col-span-3 border border-slate-500 text-black  flex items-center justify-center font-semibold">
                                 <input type="text"
-                                    name={"vender_rejection_reason_2 "}
+                                    name={"vender_rejection_reason_2"}
                                     onChange={(e) => {
                                         e.preventDefault();
                                         onChangeRejections(e)
@@ -1618,78 +1608,114 @@ const add = () => {
 
                         {/* entires 1 */}
                         {
-                            [1, 2, 3, 4].map(ele => {
+                            [1, 2, 3, 4, "submit"].map(ele => {
                                 return <div className="col-span-12 grid grid-cols-10 " key={ele}>
 
                                     <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
-                                        <input type="text"
-                                            name={"sr_no_" + ele}
-                                            onChange={(e) => {
-                                                e.preventDefault();
-                                                onTotalChangesDetails(e);
-                                            }}
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                            placeholder="" >
+                                        {
+                                            ele != "submit" ?
+                                                <input type="text"
+                                                    name={"sr_no_" + ele}
+                                                    onChange={(e) => {
+                                                        e.preventDefault();
+                                                        onTotalChangesDetails(e);
+                                                    }}
+                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                    placeholder="" >
 
-                                        </input>
+                                                </input> : null
+                                        }
+
 
                                     </div>
 
                                     <div className="col-span-2 border border-slate-500 text-black    flex items-center justify-center font-semibold">
-                                        <input type="text"
-                                            name={"machine_" + ele}
-                                            onChange={(e) => {
-                                                e.preventDefault();
-                                                onTotalChangesDetails(e);
-                                            }}
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                            placeholder="" >
 
-                                        </input>
+                                        {
+                                            ele != "submit" ?
+                                                <input type="text"
+                                                    name={"machine_" + ele}
+                                                    onChange={(e) => {
+                                                        e.preventDefault();
+                                                        onTotalChangesDetails(e);
+                                                    }}
+                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                    placeholder="" >
+
+                                                </input> : null
+                                        }
                                     </div>
 
                                     <div className="col-span-3 border border-slate-500 text-black dark:bg-gray-700   flex items-center justify-center font-semibold">
-                                        <div className="flex justify-center">
-                                            <div className="m-1 w-full">
+                                        {
+                                            ele != "submit" ?
 
-                                                <input
-                                                    className="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 dark:border-neutral-600 bg-clip-padding py-[0.32rem] px-3 text-base font-normal text-neutral-700 dark:text-neutral-200 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 dark:file:bg-neutral-700 file:px-3 file:py-[0.32rem] file:text-neutral-700 dark:file:text-neutral-100 file:transition file:duration-150 file:ease-in-out file:[margin-inline-end:0.75rem] file:[border-inline-end-width:1px] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-[0_0_0_1px] focus:shadow-primary focus:outline-none"
-                                                    type="file"
-                                                    accept="image/*"
-                                                    name={'description' + ele}
-                                                    onChange={(e) => {
+                                                <div className="flex justify-center">
+                                                    <div className="m-1 w-full">
+                                                        <input
+                                                            className="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 dark:border-neutral-600 bg-clip-padding py-[0.32rem] px-3 text-base font-normal text-neutral-700 dark:text-neutral-200 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 dark:file:bg-neutral-700 file:px-3 file:py-[0.32rem] file:text-neutral-700 dark:file:text-neutral-100 file:transition file:duration-150 file:ease-in-out file:[margin-inline-end:0.75rem] file:[border-inline-end-width:1px] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-[0_0_0_1px] focus:shadow-primary focus:outline-none"
+                                                            type="file"
+                                                            accept="image/*"
+                                                            name={'description' + ele}
+                                                            onChange={(e) => {
+                                                                e.preventDefault();
+                                                                onToolDescriptionChange(e)
+                                                            }}
+                                                            id="formFile" >
+
+                                                        </input>
+                                                    </div>
+                                                </div> :
+
+                                                <button
+                                                    type="button"
+                                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+
+                                                    onClick={(e) => {
                                                         e.preventDefault();
-                                                        onToolDescriptionChange(e)
-                                                    }}
-                                                    id="formFile" />
-                                            </div>
-                                        </div>
+                                                        handleUpload();
+
+                                                    }}>
+                                                    Upload Images
+                                                </button>
+
+
+                                        }
                                     </div>
 
                                     <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
-                                        <input type="text"
-                                            name={"tool_life_" + ele}
-                                            onChange={(e) => {
-                                                e.preventDefault();
-                                                onTotalChangesDetails(e);
-                                            }}
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                            placeholder="" >
 
-                                        </input>
+                                        {
+                                            ele != "submit" ?
+                                                <input type="text"
+                                                    name={"tool_life_" + ele}
+                                                    onChange={(e) => {
+                                                        e.preventDefault();
+                                                        onTotalChangesDetails(e);
+                                                    }}
+                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                    placeholder="" >
+
+                                                </input> : null
+                                        }
                                     </div>
 
                                     <div className="col-span-3 border border-slate-500 text-black    flex items-center justify-center font-semibold">
-                                        <input type="text"
-                                            name={"remark_" + ele}
-                                            onChange={(e) => {
-                                                e.preventDefault();
-                                                onTotalChangesDetails(e);
-                                            }}
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
-                                            placeholder="" >
 
-                                        </input>
+                                        {
+                                            ele != "submit" ?
+                                                <input type="text"
+                                                    name={"remark_" + ele}
+                                                    onChange={(e) => {
+                                                        e.preventDefault();
+                                                        onTotalChangesDetails(e);
+                                                    }}
+                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                    placeholder="" >
+
+                                                </input> : null
+                                        }
+
                                     </div>
 
                                 </div>

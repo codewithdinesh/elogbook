@@ -1,6 +1,12 @@
 # Elogbook
 
-
+<!-- Tasks
+Sheet : show lost details
+Add images by clicking button
+process of reject and vendor
+qsr
+generate download link at users view sheet and store only file name to the firebase
+ -->
 ## Getting Started
 
 > Clone the git repository
@@ -13,7 +19,7 @@ NEXT_PUBLIC_AUTH_DOMAIN=
 NEXT_PUBLIC_PROJECT_ID=
 NEXT_PUBLIC_STORAGE_BUCKET=
 NEXT_PUBLIC_MESSENGING_SENDER_ID=
-NEXT_PUBLIC_APP_ID=1:
+NEXT_PUBLIC_APP_ID=
 NEXT_PUBLIC_MEASUREMENT_ID=
 
 ```
@@ -44,5 +50,8 @@ yarn dev
 
 ## Reference
 - https://www.digitalocean.com/community/tutorials/react-react-select
+
+
+
 
 
