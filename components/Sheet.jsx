@@ -13,7 +13,7 @@ const Sheet = ({ sheet }) => {
 
 
     // hrs details
-    const hrs = [1, 2, 3, 4, 5, 6, 7, 8, "Tea I", "Lunch", "Tea II", "Total"];
+    const hrs = [1, 2, 3, 4, 5, 6, 7, 8, "Tea I", "Lunch", "Tea II",];
 
 
     return (
