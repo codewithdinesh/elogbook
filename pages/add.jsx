@@ -234,7 +234,9 @@ const add = () => {
 
             console.log(uuid());
 
-            const storageRef = ref(storage, `/files/${e[1]?.name}`);
+            const fileName = uuid() + e[1]?.name;
+
+            const storageRef = ref(storage, `/files/${fileName}`);
 
             const uploadTask = uploadBytesResumable(storageRef, e[1]);
 
@@ -255,22 +257,23 @@ const add = () => {
 
                 (error) => console.log(error),
 
+                (e) => {
 
-                async (e) => {
+                    console.log(uploadTask.snapshot.ref)
 
-                    console.log(e)
+                    // await getDownloadURL(uploadTask.snapshot.ref).then(val => {
+                    //     console.log(val);
+                    //     toast.success("Images Upload Done.")
+                    // });
 
-                    await getDownloadURL(uploadTask.snapshot.ref).then(val => {
-                        console.log(val);
-                        toast.success("Images Upload Done.")
+                    console.log(uploadTask.snapshot.ref.fullPath);
 
-                        setImages((toolImages) => (
-                            [
-                                ...toolImages,
-                                { [name]: val }
-                            ]
-                        ));
-                    });
+                    setImages((toolImages) => (
+                        [
+                            ...toolImages,
+                            { [name]: uploadTask.snapshot.ref.fullPath }
+                        ]
+                    ));
 
 
                 },
@@ -725,7 +728,7 @@ const add = () => {
                     </div>
 
                     {/* Production */}
-                    <div className=' col-span-12 p-1 mt-1 border border-slate-700'>
+                    <div className=' col-span-12 p-1 mt-1 border border-slate-700 text-xs sm:text-sm md:text-base'>
                         <h1 className='text-black font-semibold'>
                             Production
                         </h1>
@@ -763,9 +766,9 @@ const add = () => {
                                     <>
 
                                         {/* Man per hrs */}
-                                        <div className="border border-slate-500 text-black  col-span-1 ">
+                                        <div className="border border-slate-500 text-black  col-span-1 h-full">
                                             <select
-                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 h-full focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 name={"man_per_hr" + ele}
                                                 onChange={(e) => {
                                                     e.preventDefault();
@@ -787,7 +790,7 @@ const add = () => {
                                         {/* models */}
                                         <div className="border border-slate-500 text-black  col-span-1 ">
                                             <select
-                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                className="bg-gray-50 border border-gray-300 h-full text-gray-900   focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 name={"models" + ele}
                                                 onChange={(e) => {
                                                     e.preventDefault();
@@ -805,38 +808,38 @@ const add = () => {
                                         </div>
 
                                         {/* Production */}
-                                        <div className="border border-slate-500 text-black   col-span-1">
+                                        <div className="border border-slate-500 text-black   col-span-1 h-full">
                                             <input type="text"
                                                 name={"production" + ele}
                                                 onChange={(e) => {
                                                     e.preventDefault();
                                                     onProductionDetailsChange(e)
                                                 }}
-                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                className="bg-gray-50 border border-gray-300 text-gray-900  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
                                                 placeholder="" >
 
                                             </input>
                                         </div>
 
                                         {/* Act. production */}
-                                        <div className="border border-slate-500 text-black col-span-1">
+                                        <div className="border border-slate-500 text-black col-span-1 h-full">
                                             <input type="text"
                                                 name={"actual_production" + ele}
                                                 onChange={(e) => {
                                                     e.preventDefault();
                                                     onProductionDetailsChange(e)
                                                 }}
-                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
                                                 placeholder="" >
 
                                             </input>
                                         </div>
 
                                         {/* Production loss */}
-                                        <div className="border border-slate-500 text-black  col-span-1">
+                                        <div className="border border-slate-500 text-black  col-span-1 h-full ">
 
                                             <select
-                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                className="bg-gray-50 border h-full border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 name={"production_loss" + ele}
 
                                                 onChange={(e) => {
@@ -857,10 +860,12 @@ const add = () => {
 
 
                                         {/* Area of mc */}
-                                        <div className="border border-slate-500 text-black  col-span-1 ">
+                                        <div className="border border-slate-500 text-black  col-span-1 h-full ">
                                             <Select
                                                 id={ele + "random"}
                                                 instanceId={ele + "random"}
+                                                className='text-xs h-full w-full'
+
                                                 // className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 // name={"area_of_mc" + ele}
                                                 options={
@@ -896,9 +901,9 @@ const add = () => {
                                         </div>
 
                                         {/* Effect on */}
-                                        <div className="border border-slate-500 text-black  col-span-1 ">
+                                        <div className="border border-slate-500 text-black  col-span-1 h-full ">
                                             <select
-                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                className="bg-gray-50 border h-full border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 name={"effect_on" + ele}
                                                 onChange={(e) => {
                                                     e.preventDefault();
@@ -916,9 +921,9 @@ const add = () => {
                                         </div>
 
                                         {/* loss criteria */}
-                                        <div className="border border-slate-500 text-black  col-span-1 ">
+                                        <div className="border border-slate-500 text-black  col-span-1 h-full">
                                             <select
-                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                className="bg-gray-50 border border-gray-300 h-full text-gray-900  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 name={"loss_criteria" + ele}
                                                 onChange={(e) => {
                                                     e.preventDefault();
@@ -966,10 +971,10 @@ const add = () => {
                                         </div>
 
                                         {/* Production loss reason */}
-                                        <div className="border border-slate-500 text-black  col-span-1 ">
+                                        <div className="border border-slate-500 text-black  col-span-1 h-full ">
 
                                             <select
-                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                className="bg-gray-50 border border-gray-300 h-full text-gray-900   focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 name={"production_loss_reason" + ele}
                                                 onChange={
                                                     (e) => {
@@ -1088,7 +1093,7 @@ const add = () => {
                                         </div>
 
                                         {/* start timing */}
-                                        <div className="border border-slate-500 text-black   col-span-1">
+                                        <div className="border border-slate-500 text-black h-full   col-span-1">
                                             <input
                                                 type='time'
                                                 name={"start_timing" + ele}
@@ -1096,14 +1101,14 @@ const add = () => {
                                                     e.preventDefault();
                                                     onProductionDetailsChange(e)
                                                 }}
-                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                className="bg-gray-50 border border-gray-300 text-gray-900   focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
                                                 placeholder="" >
 
                                             </input>
                                         </div>
 
                                         {/* stop timing */}
-                                        <div className="border border-slate-500 text-black   col-span-1">
+                                        <div className="border border-slate-500 text-black h-full   col-span-1">
                                             <input
                                                 type='time'
                                                 name={"stop_timing" + ele}
@@ -1111,7 +1116,7 @@ const add = () => {
                                                     e.preventDefault();
                                                     onProductionDetailsChange(e)
                                                 }}
-                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
                                                 placeholder="" >
                                             </input>
                                         </div>
@@ -1125,11 +1130,11 @@ const add = () => {
 
                         <div className='grid grid-cols-12 font-semibold grid-rows-1'>
 
-                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1">Total</div>
-                            <div className="border border-slate-500 text-black col-span-2 md:col-span-2 md:p-2.5 p-1">
+                            <div className="border border-slate-500 text-black col-span-1 p-1  overflow-hidden">Total</div>
+                            <div className="border border-slate-500 text-black col-span-2 p-1">
                                 <button
                                     type="button"
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-700 rounded text-xs md:text-base w-full overflow-hidden"
 
                                     onClick={(e) => {
                                         e.preventDefault();
@@ -1141,7 +1146,7 @@ const add = () => {
                             </div>
 
                             {/* total production */}
-                            <div className="border border-slate-500 text-black col-span-1 md:col-span-1 md:p-2.5 p-1">
+                            <div className="border border-slate-500 text-black col-span-1 md:p-2.5 p-1">
                                 {total.total_production}
                             </div>
 

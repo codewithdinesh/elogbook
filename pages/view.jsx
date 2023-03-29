@@ -124,7 +124,7 @@ function view() {
 
                     {/* cell */}
                     {/*  cell index */}
-                    <div className="border border-slate-500 text-black rounded-lg m-1 flex-1">
+                    <div className="border border-slate-500 text-black rounded-lg m-1 flex-1  w-full">
                         <h1 className=' font-semibold uppercase text-white'> Cell: </h1>
 
                         <select
@@ -161,7 +161,7 @@ function view() {
                     </div>
 
                     {/* Shift */}
-                    <div className="border border-slate-500 text-black rounded-lg flex-1">
+                    <div className="border border-slate-500 text-black rounded-lg flex-1  w-full">
                         <h1 className=' font-semibold uppercase text-white'> Shift: </h1>
 
 
