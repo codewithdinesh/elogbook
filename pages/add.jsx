@@ -344,7 +344,7 @@ const add = () => {
 
 
     // hrs details
-    const hrs = [1, 2, 3, 4, 5, 6, 7, 8, "Tea I", "Lunch", "Tea II", "Total"];
+    const hrs = [1, 2, 3, 4, 5, 6, 7, 8, "Tea I", "Lunch", "Tea II", ];
 
 
     return (
@@ -1581,13 +1581,13 @@ const add = () => {
                     </div>
 
 
-                    {/* Total Change Details */}
+                    {/* Tool Change Details */}
                     <div className="col-span-12 grid grid-cols-10 mt-2">
 
-                        {/* Title of table change details */}
+                        {/* Title of tabl change details */}
 
                         <div className=" border-slate-500 text-black  col-span-12  font-semibold">
-                            Total Change Details
+                            Tool Change Details
                         </div>
 
                         <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
@@ -1598,12 +1598,12 @@ const add = () => {
                             Machine
                         </div>
 
-                        <div className="col-span-3 border border-slate-500 text-black    flex items-center justify-center font-semibold">
+                        <div className="col-span-2 border border-slate-500 text-black    flex items-center justify-center font-semibold">
                             Tool Description
 
                         </div>
 
-                        <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
+                        <div className="col-span-2 border border-slate-500 text-black    flex items-center justify-center font-semibold">
                             Tool Life
                         </div>
 
