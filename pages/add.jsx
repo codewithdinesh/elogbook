@@ -114,11 +114,11 @@ const add = () => {
 
         var temp = new Date();
 
-        var local_date1, local_date2;
+        var local_date1, local_date2, local_date3;
 
         local_date1 = temp.toJSON().substring(0, 10);
         local_date2 = temp.toJSON().substring(0, 10);
-
+        local_date3 = temp.toJSON().substring(0, 10);
 
 
 
@@ -127,23 +127,35 @@ const add = () => {
             if (production["start_timing" + ele] > production["stop_timing" + ele]) {
                 temp.setDate(temp.getDate() + 1);
                 local_date2 = temp.toJSON().substring(0, 10);
-            } else if (production["start_timing_2" + ele] > production["stop_timing_2" + ele]) {
+            }
+
+            else if (production["start_timing_2" + ele] > production["stop_timing_2" + ele]) {
                 temp.setDate(temp.getDate() + 1);
                 local_date2 = temp.toJSON().substring(0, 10);
+            }
+            else if (production["start_timing_3" + ele] > production["stop_timing_3" + ele]) {
+                temp.setDate(temp.getDate() + 1);
+                local_date3 = temp.toJSON().substring(0, 10);
             }
 
             // console.log(local_date1, local_date2);
             var prod = parseInt(production["production" + ele] || 0)
             var act_prod = parseInt(production["actual_production" + ele] || 0)
             var loss = parseInt(production["production_loss" + ele] || 0)
+
+
             var start_time = new Date(local_date1 + " " + production["start_timing" + ele]) || 0
             var stop_time = new Date(local_date2 + " " + production["stop_timing" + ele]) || 0
 
             var start_time_2 = new Date(local_date1 + " " + production["start_timing_2" + ele]) || 0
             var stop_time_2 = new Date(local_date2 + " " + production["stop_timing_2" + ele]) || 0
 
+            var start_time_3 = new Date(local_date1 + " " + production["start_timing_3" + ele]) || 0
+            var stop_time_3 = new Date(local_date2 + " " + production["stop_timing_3" + ele]) || 0
+
             var time = stop_time - start_time || 0;
             var time2 = stop_time_2 - start_time_2 || 0;
+            var time3 = stop_time_3 - start_time_3 || 0;
 
             // console.log("start:", start_time)
             // console.log("stop:", stop_time)
@@ -153,7 +165,7 @@ const add = () => {
             total_production = total_production + prod;
 
             total_loss = total_loss + loss;
-            total_time = time + total_time + time2;
+            total_time = time + total_time + time2 + time3;
 
 
         });
@@ -1406,6 +1418,280 @@ const add = () => {
 
 
                                     </>
+
+
+                                    {/* Row 3*/}
+
+                                    <>
+                                        <div className='col-span-6'>
+
+                                        </div>
+                                        {/* Area of mc */}
+                                        <div className="border border-slate-500 text-black  col-span-1 h-full ">
+                                            <Select
+                                                id={ele + "random"}
+                                                instanceId={ele + "random"}
+                                                className='text-xs h-full w-full'
+
+                                                // className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                // name={"area_of_mc" + ele}
+                                                options={
+                                                    [
+                                                        { label: "All cell", value: "All cell" },
+                                                        { label: "Input", value: "Input" },
+                                                        { label: "Induction heating machine", value: "Induction heating machine" },
+                                                        { label: "Makino LH", value: "Makino LH" },
+                                                        { label: "Makino RH", value: "Mkaino RH" },
+                                                        { label: "FRD LH", value: "FRD LH" },
+                                                        { label: "FRD RH", value: "FRD RH" },
+                                                        { label: "Washing machine", value: "Washing machine" },
+                                                        { label: "Both makino", value: "Both makino" },
+                                                        { label: "Plug fitting", value: "Plug fitting" },
+                                                        { label: "leak test and pipe press", value: "leak test and pipe press" },
+                                                        { label: "Nozzle press machine", value: "Nozzle press machine" },
+                                                        { label: "Convyor", value: "Convyor" },
+
+                                                    ]
+                                                }
+                                                onChange={(e) => {
+
+                                                    const d = {
+                                                        target: {
+                                                            value: e.value,
+                                                            name: "area_of_mc_3" + ele
+                                                        }
+                                                    }
+                                                    onProductionDetailsChange(d);
+                                                }}>
+                                            </Select>
+
+                                        </div>
+
+                                        {/* Effect on */}
+                                        <div className="border border-slate-500 text-black  col-span-1 h-full ">
+                                            <select
+                                                className="bg-gray-50 border h-full border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                name={"effect_on_3" + ele}
+                                                onChange={(e) => {
+                                                    e.preventDefault();
+                                                    onProductionDetailsChange(e);
+                                                }}>
+
+                                                <option value="">Select </option>
+                                                <option value="A" >A</option>
+                                                <option value="P" >P</option>
+                                                <option value="Q"> Q</option>
+                                                <option value="Shutdown">Shutdown</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+
+                                        </div>
+
+                                        {/* loss criteria */}
+                                        <div className="border border-slate-500 text-black  col-span-1 h-full">
+                                            <select
+                                                className="bg-gray-50 border border-gray-300 h-full text-gray-900  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                name={"loss_criteria_3" + ele}
+                                                onChange={(e) => {
+                                                    e.preventDefault();
+                                                    onProductionDetailsChange(e);
+                                                }}>
+
+
+                                                {
+                                                    production["effect_on_3" + ele] == "A" ? <>
+                                                        <option value="">Select </option>
+                                                        <option value="Equipment Failure loss" >Equipment Failure loss</option>
+                                                        <option value="Setup and Adjustment" >Setup and Adjustment</option>
+                                                        <option value="Tool Change loss"> Tool Change loss</option>
+                                                        <option value="Measure and Adjust loss">Measure and Adjust loss</option>
+                                                        <option value="Defect loss">Defect loss</option>
+                                                        <option value="Management loss">Management loss</option>
+
+                                                    </>
+                                                        : production["effect_on_3" + ele] == "P" ?
+                                                            <>
+                                                                <option value="">Select </option>
+                                                                <option value="Minor stopages" >Minor stopages</option>
+                                                                <option value="Speed loss" >Speed loss</option>
+                                                                <option value="motion loss"> motion loss</option>
+
+                                                            </> : production["effect_on_3" + ele] == "Q" ?
+                                                                <>
+                                                                    <option value="">Select </option>
+                                                                    <option value="Rejection" >Rejection</option>
+                                                                    <option value="Vender rejection" >Vender Rejection</option>
+
+                                                                </> : production["effect_on_3" + ele] == "Shutdown" ?
+                                                                    <>
+                                                                        <option value="">Select </option>
+                                                                        <option value="PDT" > PDT</option>
+
+
+                                                                    </> : production["effect_on_3" + ele] == "Other" ?
+                                                                        <>
+                                                                            <option value="">Select </option>
+                                                                            <option value="Others" > Others</option>
+                                                                        </> : null
+                                                }
+                                            </select>
+                                        </div>
+
+                                        {/* Production loss reason */}
+                                        <div className="border border-slate-500 text-black  col-span-1 h-full ">
+
+                                            <select
+                                                className="bg-gray-50 border border-gray-300 h-full text-gray-900   focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                name={"production_loss_reason_3" + ele}
+                                                onChange={
+                                                    (e) => {
+                                                        e.preventDefault();
+                                                        onProductionDetailsChange(e);
+                                                    }
+                                                }
+                                            >
+                                                {
+                                                    production["loss_criteria_3" + ele] == "Tool Change loss" ?
+                                                        <>
+                                                            <option value="">Select </option>
+                                                            <option value="FRD LH" > FRD LH </option>
+                                                            <option value="FRD RH" >FRD RH</option>
+                                                            <option value="Makino LH" >Makino LH </option>
+                                                            <option value="Makino RH" >Makino RH</option>
+
+                                                        </> : production["loss_criteria_3" + ele] == "Equipment Failure loss" ?
+                                                            <>
+                                                                <option value="">Select </option>
+                                                                <option value="Convyor not work" > Convyor not work</option>
+                                                                <option value="Air leakage" >Air leakage</option>
+                                                                <option value="Auto door Prob" >Auto door Prob</option>
+                                                                <option value="R face height Prob" >R face height Prob</option>
+                                                                <option value="Auto power failure" > Auto door Power failure </option>
+                                                                <option value="Hyd. Oil level low" >Hyd.oil level low</option>
+                                                                <option value="Lub.oil level low" >Lub.oil level low </option>
+                                                                <option value="Oriation sensor fail" >Oriation sensor fail</option>
+                                                                <option value="Over current fault" > Over current fault </option>
+                                                                <option value="Feed hold" >Feed hold</option>
+                                                                <option value="Coan cleaning" >Coan cleaning</option>
+                                                                <option value="T commander Error" >T commander Error</option>
+
+                                                            </> : production["loss_criteria_3" + ele] == "Management loss" ?
+                                                                <>
+                                                                    <option value="">Select </option>
+                                                                    <option value="No man power" > No man power </option>
+                                                                    <option value="No Air" >No Air</option>
+                                                                    <option value="No material" > No material</option>
+                                                                    <option value="No plan" > No plan</option>
+                                                                    <option value="No Empty bin" > No Empty bin</option>
+
+                                                                </> : production["loss_criteria_3" + ele] == "Defect loss" ?
+                                                                    <>
+                                                                        <option value="">Select </option>
+                                                                        <option value="Random" > Random </option>
+                                                                        <option value="B type Defect" > B type Defect</option>
+
+
+
+                                                                    </> : production["loss_criteria_3" + ele] == "Minor stopages" ?
+                                                                        <>
+                                                                            <option value="">Select </option>
+                                                                            <option value="Probe Out of Tol" > Probe out of Tol</option>
+                                                                            <option value="M.C feed hold" >M.C feed hold</option>
+                                                                            <option value="Tool life over" >Tool life over </option>
+                                                                            <option value="Probe start up failure" >Probe start up failure</option>
+                                                                            <option value="Pallet ready prob" > Pallet ready prob </option>
+                                                                            <option value="Sl upper limit alarm" >Sl upper limit alarm</option>
+                                                                            <option value="Tool life over" >Tool life over </option>
+                                                                            <option value="Seal change" >Seal change</option>
+                                                                            <option value="Seat check Prob" >Seat check Prob</option>
+
+                                                                        </> : production["loss_criteria_3" + ele] == "Speed loss" ?
+                                                                            <>
+                                                                                <option value="">Select </option>
+                                                                                <option value="Tool parameters change" > Tool parameters change </option>
+                                                                                <option value="M.C parameters change" > M.C parameters change</option>
+
+                                                                            </> : production["loss_criteria_3" + ele] == "motion Loss" ?
+                                                                                <>
+                                                                                    <option value="">Select </option>
+                                                                                    <option value="Layout change" > Layout change </option>
+                                                                                    <option value="Blanceing change" > Blanceing change</option>
+
+                                                                                </> : production["loss_criteria_3" + ele] == "Vender rejection" ?
+                                                                                    <>
+
+                                                                                        <option value="C.D" > C.D </option>
+                                                                                        <option value="Operation missing" >Operation missing</option>
+                                                                                        <option value="Input Dent" >Input Dent </option>
+
+                                                                                    </> : production["loss_criteria_3" + ele] == "Rejection" ?
+                                                                                        <>
+                                                                                            <option value="">Select </option>
+                                                                                            <option value="Milling face dent" > Milling face dent </option>
+
+                                                                                        </> : production["loss_criteria_3" + ele] == "PDT" ?
+                                                                                            <>
+                                                                                                <option value="">Select </option>
+                                                                                                <option value="No Input material" > No Input material </option>
+                                                                                                <option value="No Engine Plan" > No Engine Plan</option>
+                                                                                                <option value="No Empty Bin" > No Empty Bin </option>
+
+
+                                                                                            </> : production["loss_criteria_3" + ele] == "Others" ?
+                                                                                                <>
+                                                                                                    <option value="">Select </option>
+                                                                                                    <option value="Start up/ warm up/ daily jh" > Start up/ warm up/ daily Jh</option>
+                                                                                                    <option value="single side running" >Single side running</option>
+                                                                                                    <option value="Break work other cell" >Break work other cell </option>
+                                                                                                    <option value="Inventory clear" > Inventory clear </option>
+                                                                                                    <option value="New model trial" >New model trial</option>
+                                                                                                    <option value="weekly jh makino & Frd" >weekly jh makino & frd</option>
+                                                                                                    <option value="Robo C.D MLH" > Robo C.D MLH</option>
+                                                                                                    <option value="Robo c.D. MRH" >Robo C.D MRH</option>
+                                                                                                    <option value="Robo C.D Frd RH" > Robo C.D Frd RH </option>
+                                                                                                    <option value="Robo C.D Frd LH" > Robo C.D Frd LH </option>
+                                                                                                    <option value="Robo C.D Frd RH" >Robo C.D Frd RH</option>
+                                                                                                    <option value="New man Training" > New man Training </option>
+                                                                                                </> : null
+                                                }
+
+                                            </select>
+
+                                        </div>
+
+                                        {/* start timing */}
+                                        <div className="border border-slate-500 text-black h-full   col-span-1">
+                                            <input
+                                                type='time'
+                                                name={"start_timing_3" + ele}
+                                                onChange={(e) => {
+                                                    e.preventDefault();
+                                                    onProductionDetailsChange(e)
+                                                }}
+                                                className="bg-gray-50 border border-gray-300 text-gray-900   focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                placeholder="" >
+
+                                            </input>
+                                        </div>
+
+                                        {/* stop timing */}
+                                        <div className="border border-slate-500 text-black h-full   col-span-1">
+                                            <input
+                                                type='time'
+                                                name={"stop_timing_3" + ele}
+                                                onChange={(e) => {
+                                                    e.preventDefault();
+                                                    onProductionDetailsChange(e)
+                                                }}
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
+                                                placeholder="" >
+                                            </input>
+                                        </div>
+
+
+                                    </>
+
+
                                 </div>
                             })
                         }
