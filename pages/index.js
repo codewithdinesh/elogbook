@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import NavBar from '@/components/NavBar'
+
 import Head from 'next/head'
 import Image from 'next/image'
 
@@ -17,6 +18,7 @@ export default function Home() {
       {/* <div className='container mx-auto'> */}
 
       <NavBar />
+
       <main className='flex flex-col justify-center w-full'>
 
 
@@ -26,6 +28,8 @@ export default function Home() {
           alt="Image"
         >
         </img>
+
+
 
       </main>
       {/* </div> */}

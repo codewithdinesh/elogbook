@@ -9,16 +9,42 @@ import Router from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import DailyChart from './view/DailyChart';
 
 const Sheet = ({ sheet }) => {
 
     const [images, setImages] = useState([]);
+    const [Qle, setQle] = useState(0.0);
+    const [Availability, setAvailability] = useState(0.0);
+    const [Quality, setQuality] = useState(0.0);
 
 
 
     useEffect(() => {
+        console.log("A", parseFloat(sheet?.production?.total?.["total_a"]));
+        console.log("P", parseFloat(sheet?.production?.total?.["total_p"]));
+        console.log("Q", parseFloat(sheet?.production?.total?.["total_q"]));
 
-    }, [])
+        let a = 480 - parseFloat(sheet?.production?.total?.["total_a"]);
+        let p = 480 - parseFloat(sheet?.production?.total?.["total_p"]);
+        let q = 480 - parseFloat(sheet?.production?.total?.["total_q"]);
+
+        setQle((a * p * q) / 1000000);
+
+
+        let total_loss_time = parseFloat(sheet?.production?.total?.["total_time"]);
+
+        setAvailability(((480 - total_loss_time) / 480) * 100);
+
+        let total_actual_production = parseFloat(sheet?.production?.total?.["total_actual_production"]);
+        let total_expected_production = parseFloat(sheet?.production?.total?.["total_production"]);
+
+        setQuality(((total_expected_production - total_actual_production) / total_expected_production) * 100);
+
+    }, []);
+
+
+
 
 
     // hrs details
@@ -1178,9 +1204,26 @@ const Sheet = ({ sheet }) => {
             </div >
 
             {/* Graphs */}
-            < div >
+            <div className="mx-auto container p-1  flex flex-col md:flex-row flex-wrap bg-white rounded-md justify-center ">
 
-            </div >
+                {/* QLE */}
+                <div className="">
+
+                    <DailyChart value={Qle} maxValue={100} title={"QLE"} label={"QLE"} />
+                </div>
+
+                {/* Availibility */}
+                <div className="">
+
+                    <DailyChart value={Availability} maxValue={100} title={"Availability"} label={"Availability"} />
+                </div>
+
+                {/* Quality */}
+                <div className="">
+
+                    <DailyChart value={Quality} maxValue={100} title={"Quality"} label={"Quality"} />
+                </div>
+            </div>
         </>
 
 

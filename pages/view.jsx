@@ -2,6 +2,7 @@
 import { useAuth } from '@/components/AuthUserContext';
 import NavBar from '@/components/NavBar';
 import Sheet from '@/components/Sheet'
+
 import { db } from '@/lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { Router } from 'next/router';
@@ -47,6 +48,8 @@ function view() {
     }
 
 
+
+
     const loadData = async () => {
         // const date = new Date().toJSON().slice(0, 10);
 
@@ -71,7 +74,6 @@ function view() {
             toast.info("No records Found")
         }
     }
-
 
 
     return (
@@ -212,6 +214,8 @@ function view() {
             {
                 sheet ? <Sheet sheet={sheet} /> : null
             }
+
+
         </div >
     )
 }
