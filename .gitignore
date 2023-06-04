@@ -34,3 +34,6 @@ yarn-error.log*
 
 # /lib/firebase.js
 /research
+
+research/log2.jpeg
+research/physical_log.jpeg
