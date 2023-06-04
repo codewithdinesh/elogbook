@@ -112,6 +112,16 @@ const add = () => {
 
         var total_production = 0, total_actual_production = 0, total_loss = 0, total_time = 0;
 
+        // total A time
+        var total_a = 0;
+
+        // total P time
+        var total_p = 0;
+
+        // Total Q time
+        var total_q = 0;
+
+
         var temp = new Date();
 
         var local_date1, local_date2, local_date3;
@@ -167,16 +177,64 @@ const add = () => {
             total_loss = total_loss + loss;
             total_time = time + total_time + time2 + time3;
 
+            // console.log(production["effect_on" + ele])
+
+
+            // FOR A
+
+            if (production["effect_on" + ele] == "A") {
+                total_a = total_a + time;
+            }
+            if (production["effect_on_2" + ele] == "A") {
+                total_a = total_a + time2;
+            }
+
+            if (production["effect_on_3" + ele] == "A") {
+                total_a = total_a + time3;
+            }
+
+            // FOR P
+
+            if (production["effect_on" + ele] == "P") {
+                total_p = total_p + time;
+            }
+            if (production["effect_on_2" + ele] == "P") {
+                total_p = total_p + time2;
+            }
+
+            if (production["effect_on_3" + ele] == "P") {
+                total_p = total_p + time3;
+            }
+
+
+            // FOR Q
+            if (production["effect_on" + ele] == "Q") {
+                total_q = total_q + time;
+            }
+            if (production["effect_on_2" + ele] == "Q") {
+                total_q = total_q + time2;
+            }
+
+            if (production["effect_on_3" + ele] == "Q") {
+                total_q = total_q + time3;
+            }
+
 
         });
 
         console.log("time:", total_time);
+        console.log("Loss A: ", total_a);
+        console.log("Loss P: ", total_p);
+        console.log("Loss Q: ", total_q);
 
         setTotal({
             "total_production": total_production,
             "total_actual_production": total_actual_production,
             "total_loss": total_loss,
-            "total_time": millisToMinutesAndSeconds(total_time)
+            "total_time": millisToMinutesAndSeconds(total_time),
+            "total_a": millisToMinutesAndSeconds(total_a),
+            "total_p": millisToMinutesAndSeconds(total_p),
+            "total_q": millisToMinutesAndSeconds(total_q)
         })
 
     }
@@ -357,8 +415,6 @@ const add = () => {
             toast("something went wrong..")
 
         });
-
-
 
 
     }
