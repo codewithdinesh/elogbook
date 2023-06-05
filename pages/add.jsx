@@ -2189,13 +2189,13 @@ const add = () => {
                                 </input>
                             </div>
 
-                            {/* QLE */}
+                            {/* OLE */}
                             <div className="col-span-2 border border-slate-500 text-black    flex items-center justify-center font-semibold">
-                                QLE
+                                OLE
                             </div>
                             <div className="col-span-2 border border-slate-500 text-black  flex items-center justify-center font-semibold">
                                 <input type="text"
-                                    name={"qle"}
+                                    name={"ole"}
                                     onChange={(e) => {
                                         e.preventDefault();
                                         onChangeQsr(e)
