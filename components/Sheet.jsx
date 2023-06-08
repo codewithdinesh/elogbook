@@ -1218,6 +1218,12 @@ const Sheet = ({ sheet }) => {
                     <DailyChart value={Availability} maxValue={100} title={"Availability"} label={"Availability"} />
                 </div>
 
+                {/* Performance */}
+                <div className="">
+
+                    <DailyChart value={Performance} maxValue={100} title={"Performance"} label={"Performance"} />
+                </div>
+
                 {/* Quality */}
                 <div className="">
 
