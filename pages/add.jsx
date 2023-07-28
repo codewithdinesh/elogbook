@@ -956,6 +956,8 @@ const add = () => {
                                                         { label: "Makino RH", value: "Mkaino RH" },
                                                         { label: "FRD LH", value: "FRD LH" },
                                                         { label: "FRD RH", value: "FRD RH" },
+                                                        { label: "Robo 1", value: "Robo 1" },
+                                                        { label: "Robo 2", value: "Robo 2" },
                                                         { label: "Washing machine", value: "Washing machine" },
                                                         { label: "Both makino", value: "Both makino" },
                                                         { label: "Plug fitting", value: "Plug fitting" },
@@ -1228,6 +1230,8 @@ const add = () => {
                                                         { label: "Makino RH", value: "Mkaino RH" },
                                                         { label: "FRD LH", value: "FRD LH" },
                                                         { label: "FRD RH", value: "FRD RH" },
+                                                        { label: "Robo 1", value: "Robo 1" },
+                                                        { label: "Robo 2", value: "Robo 2" },
                                                         { label: "Washing machine", value: "Washing machine" },
                                                         { label: "Both makino", value: "Both makino" },
                                                         { label: "Plug fitting", value: "Plug fitting" },
@@ -1500,6 +1504,8 @@ const add = () => {
                                                         { label: "Makino RH", value: "Mkaino RH" },
                                                         { label: "FRD LH", value: "FRD LH" },
                                                         { label: "FRD RH", value: "FRD RH" },
+                                                        { label: "Robo 1", value: "Robo 1" },
+                                                        { label: "Robo 2", value: "Robo 2" },
                                                         { label: "Washing machine", value: "Washing machine" },
                                                         { label: "Both makino", value: "Both makino" },
                                                         { label: "Plug fitting", value: "Plug fitting" },
@@ -2183,13 +2189,13 @@ const add = () => {
                                 </input>
                             </div>
 
-                            {/* QLE */}
+                            {/* OLE */}
                             <div className="col-span-2 border border-slate-500 text-black    flex items-center justify-center font-semibold">
-                                QLE
+                                OLE
                             </div>
                             <div className="col-span-2 border border-slate-500 text-black  flex items-center justify-center font-semibold">
                                 <input type="text"
-                                    name={"qle"}
+                                    name={"ole"}
                                     onChange={(e) => {
                                         e.preventDefault();
                                         onChangeQsr(e)

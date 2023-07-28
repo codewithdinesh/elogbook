@@ -39,7 +39,7 @@ const Sheet = ({ sheet }) => {
         let p = 480 - total_p;
         let q = 480 - total_q;
 
-        setQle((a * p * q) / 1000000);
+        setOle((a * p * q) / 1000000);
 
         console.log("hrs_rate" + hrs_rate)
 
@@ -1039,14 +1039,14 @@ const Sheet = ({ sheet }) => {
                                 </input>
                             </div>
 
-                            {/* QLE */}
+                            {/* OLE */}
                             <div className="col-span-2 border border-slate-500 text-black    flex items-center justify-center font-semibold">
-                                QLE
+                                OLE
                             </div>
                             <div className="col-span-2 border border-slate-500 text-black  flex items-center justify-center font-semibold">
                                 <input type="text"
                                     disabled
-                                    value={sheet?.qsr?.qle}
+                                    value={sheet?.qsr?.ole}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
                                     placeholder="" >
 
@@ -1057,13 +1057,13 @@ const Sheet = ({ sheet }) => {
                     </div>
 
 
-                    {/* Total Change Details */}
+                    {/* Tool Change Details */}
                     <div className="col-span-12 grid grid-cols-10 mt-2">
 
                         {/* Title of table change details */}
 
                         <div className=" border-slate-500 text-black  col-span-12  font-semibold">
-                            Total Change Details
+                            Tool Change Details
                         </div>
 
                         <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
@@ -1116,7 +1116,7 @@ const Sheet = ({ sheet }) => {
                                     <div className="col-span-3 border border-slate-500 text-black    flex items-center justify-center font-semibold h-auto">
 
                                         {
-                                            sheet?.total_changes?.toolImages[0]?.["description" + ele] ?
+                                            sheet?.tool_changes?.toolImages[0]?.["description" + ele] ?
                                                 <Image
                                                     src={
                                                         getImageUrl("files/fdc008d4-dc1c-4622-8069-f54f90d4bd26like-btn.png") || images[0].url
@@ -1134,7 +1134,7 @@ const Sheet = ({ sheet }) => {
                                     <div className="col-span-1 border border-slate-500 text-black    flex items-center justify-center font-semibold">
                                         <input type="text"
                                             disabled
-                                            value={sheet?.total_changes?.totalChanges["tool_life_" + ele]}
+                                            value={sheet?.tool_changes?.toolChanges["tool_life_" + ele]}
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
                                             placeholder="" >
 
@@ -1144,7 +1144,7 @@ const Sheet = ({ sheet }) => {
                                     <div className="col-span-3 border border-slate-500 text-black    flex items-center justify-center font-semibold">
                                         <input type="text"
                                             disabled
-                                            value={sheet?.total_changes?.totalChanges["remark_" + ele]}
+                                            value={sheet?.tool_changes?.toolChanges["remark_" + ele]}
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-0"
                                             placeholder="" >
 
@@ -1225,16 +1225,22 @@ const Sheet = ({ sheet }) => {
             {/* Graphs */}
             <div className="mx-auto container p-1  flex flex-col md:flex-row flex-wrap bg-white rounded-md justify-center ">
 
-                {/* QLE */}
+                {/* OLE */}
                 <div className="">
 
-                    <DailyChart value={Qle} maxValue={100} title={"QLE"} label={"QLE"} />
+                    <DailyChart value={Ole} maxValue={100} title={"OLE"} label={"OLE"} />
                 </div>
 
                 {/* Availibility */}
                 <div className="">
 
                     <DailyChart value={Availability} maxValue={100} title={"Availability"} label={"Availability"} />
+                </div>
+
+                {/* Performance */}
+                <div className="">
+
+                    <DailyChart value={Performance} maxValue={100} title={"Performance"} label={"Performance"} />
                 </div>
 
                 {/* Quality */}
