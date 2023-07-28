@@ -17,6 +17,7 @@ const Sheet = ({ sheet }) => {
     const [Qle, setQle] = useState(0.0);
     const [Availability, setAvailability] = useState(0.0);
     const [Quality, setQuality] = useState(0.0);
+    const [performance, setPerformance] = useState(0.0);
 
 
 
@@ -25,16 +26,34 @@ const Sheet = ({ sheet }) => {
         console.log("P", parseFloat(sheet?.production?.total?.["total_p"]));
         console.log("Q", parseFloat(sheet?.production?.total?.["total_q"]));
 
-        let a = 480 - parseFloat(sheet?.production?.total?.["total_a"]);
-        let p = 480 - parseFloat(sheet?.production?.total?.["total_p"]);
-        let q = 480 - parseFloat(sheet?.production?.total?.["total_q"]);
+        const total_p = parseFloat(sheet?.production?.total?.["total_p"]);
+        const total_q = parseFloat(sheet?.production?.total?.["total_p"]);
+        const total_a = parseFloat(sheet?.production?.total?.["total_a"]);
+
+        const total_time = parseFloat(sheet?.production?.total?.["total_time"]);
+        const total_production = parseFloat(sheet?.production?.total?.["total_production"]);
+
+        const hrs_rate = parseFloat(sheet?.details.hr_rate);
+
+        let a = 480 - total_a;
+        let p = 480 - total_p;
+        let q = 480 - total_q;
 
         setQle((a * p * q) / 1000000);
 
+        console.log("hrs_rate" + hrs_rate)
+
+
+        let performance = ((480 / 40) / 480 - total_p);
+
+        console.log(performance)
+        setPerformance(performance);
 
         let total_loss_time = parseFloat(sheet?.production?.total?.["total_time"]);
 
-        setAvailability(((480 - total_loss_time) / 480) * 100);
+        const TotalAvailability = ((480 - total_loss_time) / 480) * 100;
+
+        setAvailability(TotalAvailability);
 
         let total_actual_production = parseFloat(sheet?.production?.total?.["total_actual_production"]);
         let total_expected_production = parseFloat(sheet?.production?.total?.["total_production"]);
@@ -1222,6 +1241,12 @@ const Sheet = ({ sheet }) => {
                 <div className="">
 
                     <DailyChart value={Quality} maxValue={100} title={"Quality"} label={"Quality"} />
+                </div>
+
+                {/* Performance */}
+                <div className="">
+
+                    <DailyChart value={performance} maxValue={100} title={"Performance"} label={"Performance"} />
                 </div>
             </div>
         </>

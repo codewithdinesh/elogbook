@@ -2,9 +2,10 @@
 import { useAuth } from '@/components/AuthUserContext';
 import NavBar from '@/components/NavBar';
 import Sheet from '@/components/Sheet'
+import MonthlySheet from '@/components/view/MonthlySheet';
 
 import { db } from '@/lib/firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, query } from 'firebase/firestore';
 import { Router } from 'next/router';
 import React, { useEffect, useState } from 'react'
 
@@ -17,6 +18,8 @@ function view() {
     const [shift, setShift] = useState("");
     const [cell, setCell] = useState("");
     const [sheet, setSheet] = useState();
+    const [monthSheet, setMonthSheet] = useState();
+
 
     const { authUser, loading } = useAuth();
 
@@ -28,11 +31,10 @@ function view() {
 
     const onSearch = (e) => {
         e.preventDefault();
+        loadMonthSheet();
 
         if (!date || date == "") {
-
             toast.error("choose Date !!");
-
         }
         else if (!shift || shift == "") {
             toast.error("choose Shift!!");
@@ -72,6 +74,35 @@ function view() {
         } else {
             console.log("No such document!");
             toast.info("No records Found")
+        }
+    }
+
+    const loadMonthSheet = async () => {
+        const year = 2023;
+        const month = 5;
+
+        // Calculate the start and end dates for the specified month and year
+        const startDate = new Date(year, month - 1, 1); // Months in JavaScript are 0-based (January is 0, February is 1, and so on)
+        const endDate = new Date(year, month, 0);
+
+        try {
+
+
+            const querySnapshot = await getDocs(collection(db, "production"));
+
+            console.log(querySnapshot);
+
+            const fetchedData = querySnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+
+            console.log("fetchedData:");
+            console.log(fetchedData);
+
+            setMonthSheet(fetchedData);
+        } catch (error) {
+            console.error('Error getting documents: ', error);
         }
     }
 
@@ -215,6 +246,10 @@ function view() {
                 sheet ? <Sheet sheet={sheet} /> : null
             }
 
+            {/* Monthly sheet */}
+            {
+                monthSheet ? <MonthlySheet sheet={sheet} /> : null
+            }
 
         </div >
     )

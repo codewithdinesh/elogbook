@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -9,6 +9,12 @@ ChartJS.register(ChartDataLabels);
 
 const DailyChart = ({ value, maxValue, title, label }) => {
     const chartRef = useRef(null);
+
+    const [chartColor, setChartColor] = useState("");
+
+    console.log(value);
+
+
 
     useEffect(() => {
         const mediaQuery = window.matchMedia('screen and (max-resolution: 96dpi)');
@@ -21,8 +27,19 @@ const DailyChart = ({ value, maxValue, title, label }) => {
 
         window.addEventListener('resize', handleResize);
 
+
         return () => {
             window.removeEventListener('resize', handleResize);
+
+            if (value >= 80 && value < 90) {
+                setChartColor("yellow");
+            }
+            else if (value >= 90) {
+                setChartColor("green");
+            }
+            if (value >= 0 && value < 80) {
+                setChartColor("red");
+            }
         };
     }, []);
 
@@ -31,7 +48,7 @@ const DailyChart = ({ value, maxValue, title, label }) => {
         datasets: [
             {
                 data: [value.toFixed(2), (maxValue - value).toFixed(2)],
-                backgroundColor: ['rgba(54, 162, 235, 1)', 'rgba(0, 0, 0, 0)'],
+                backgroundColor: [chartColor, 'rgba(0, 0, 0, 0)'],
                 borderColor: [
                     // 'rgba(255, 99, 132, 1)',
                     'rgba(54, 162, 235, 1)',
