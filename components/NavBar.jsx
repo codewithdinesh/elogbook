@@ -38,6 +38,14 @@ const NavBar = ({ isHome }) => {
                         </h1>
                     </div>
 
+                    <div className='cursor-pointer'>
+                        <button className=' text-blue-800  max-h-1 inline-block p-2'>
+                            <div id="google_translate_element" className=' '></div>
+
+                        </button>
+                    </div>
+
+
                     {
                         (authUser && !loading) ?
 
@@ -190,10 +198,16 @@ const NavBar = ({ isHome }) => {
                                                     Register
                                                 </button>
                                             </Link>
+
                                         </div>
+                                        {/* <div id="google_translate_element" ></div> */}
+
                                     </div>
                                 </div>
+
+
                     }
+
 
                 </div>
             </nav>
